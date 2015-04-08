@@ -1,0 +1,16 @@
+Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------
+| Tool Version : Vivado v.2014.2 (win64) Build 932637 Wed Jun 11 13:33:10 MDT 2014
+| Date         : Mon Mar 09 15:47:38 2015
+| Host         : 0602-PC running 64-bit major release  (build 9200)
+| Command      : upgrade_ip
+| Device       : xc7vx485tffg1761-2
+-----------------------------------------------------------------------------------
+
+Upgrade Log for IP 'trigger_clock_synth'
+
+1. Summary
+----------
+
+SUCCESS in the update of trigger_clock_synth (xilinx.com:ip:clk_wiz:5.1 (Rev. 3)) to current project options.
+
