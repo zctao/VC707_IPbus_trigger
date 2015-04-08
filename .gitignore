@@ -48,7 +48,7 @@ project_2/project_2.cache/
 project_2/project_2.data/
 project_2/project_2.hw/
 project_2/project_2.sim/
-project_2/project_2.ioplanning/
+
 *.bak
 project_2/vivado_6680.backup.jou
 project_2/vivado.log
