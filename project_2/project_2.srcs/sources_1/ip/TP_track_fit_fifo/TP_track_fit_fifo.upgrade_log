@@ -1,0 +1,16 @@
+Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2014.4 (win64) Build 1071353 Tue Nov 18 18:24:04 MST 2014
+| Date         : Wed Apr 08 12:19:34 2015
+| Host         : PCPSB375 running 64-bit Service Pack 1  (build 7601)
+| Command      : upgrade_ip
+| Device       : xc7vx485tffg1761-2
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'TP_track_fit_fifo'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of TP_track_fit_fifo (xilinx.com:ip:fifo_generator:12.0) from (Rev. 1) to (Rev. 3)
+

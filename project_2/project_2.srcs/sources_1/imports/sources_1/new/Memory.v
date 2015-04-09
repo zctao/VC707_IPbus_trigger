@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Memory #(parameter RAM_WIDTH = 36, parameter RAM_ADDR_BITS = 9, parameter INIT_FILE = "D:/GLIB Firmware/branches/jectest/prj/viv_1/project_2/empty.txt" )(
+module Memory #(parameter RAM_WIDTH = 36, parameter RAM_ADDR_BITS = 9, parameter INIT_FILE = "D:/sempty.txt" )(
     // Output
 	output reg [RAM_WIDTH-1:0] output_data,
 	// Input

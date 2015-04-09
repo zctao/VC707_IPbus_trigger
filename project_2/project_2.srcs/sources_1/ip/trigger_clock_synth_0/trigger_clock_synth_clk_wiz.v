@@ -125,8 +125,7 @@ module trigger_clock_synth_clk_wiz
     .CLKOUT1_PHASE        (0.000),
     .CLKOUT1_DUTY_CYCLE   (0.500),
     .CLKOUT1_USE_FINE_PS  ("FALSE"),
-    .CLKIN1_PERIOD        (5.0),
-    .REF_JITTER1          (0.010))
+    .CLKIN1_PERIOD        (5.0))
   mmcm_adv_inst
     // Output clocks
    (

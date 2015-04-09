@@ -3,26 +3,26 @@
 # signal it is.
 
 #200 MHz system clock
-# 'SYSCLK' in the VC709 manual, 'clk200' in this project
+# 'SYSCLK' in the VC707 manual, 'clk200' in this project
 set_property IOSTANDARD LVDS [get_ports clk200_p]
 set_property PACKAGE_PIN E18 [get_ports clk200_n]
 set_property IOSTANDARD LVDS [get_ports clk200_n]
 
 # programmable oscillator
-# 'USER_CLOCK' in the VC709 manual, 'prog_clk' in this project
+# 'USER_CLOCK' in the VC707 manual, 'prog_clk' in this project
 set_property IOSTANDARD LVDS [get_ports prog_clk_p]
 set_property PACKAGE_PIN AL34 [get_ports prog_clk_n]
 set_property IOSTANDARD LVDS [get_ports prog_clk_n]
 
 # USER SMA
-# USER_SMA_CLOCK in the VC709 manual, 'sma_clk' in this project
+# USER_SMA_CLOCK in the VC707 manual, 'sma_clk' in this project
 # These are outputs in this design!
 set_property IOSTANDARD LVDS [get_ports sma_clk_p]
 set_property PACKAGE_PIN AK32 [get_ports sma_clk_n]
 set_property IOSTANDARD LVDS [get_ports sma_clk_n]
 
 # MGTREFCLK1 SMA
-# SMA_MGT_REFCLK in the VC709 manual, 'gt_clkp, gt_clkn' in this project
+# SMA_MGT_REFCLK in the VC707 manual, 'gt_clkp, gt_clkn' in this project
 # These are externally looped back from the 'sma_clk'
 set_property PACKAGE_PIN AK7 [get_ports gt_clkn]
 
@@ -103,4 +103,41 @@ set_property IOSTANDARD LVCMOS18 [get_ports {lcd[5]}]
 set_property PACKAGE_PIN AN40 [get_ports {lcd[6]}]
 set_property IOSTANDARD LVCMOS18 [get_ports {lcd[6]}]
 
+#FMC1
+#GT Clock
+#FMC1_HPC_GBTCLK1_M2C_C_P(N) in VC707 manual. FMC1_GBTCLK1_P(N) in this project
+set_property PACKAGE_PIN E10 [get_ports FMC1_GBTCLK1_P]
+set_property PACKAGE_PIN E9 [get_ports FMC1_GBTCLK1_N]
+#SFP4
+#FMC1_HPC_DP7_C2M_P(N) in VC707 manual. FMC_SFP4_TX_P(N) in this project
+set_property PACKAGE_PIN F4 [get_ports FMC_SFP4_TX_P]
+set_property PACKAGE_PIN F3 [get_ports FMC_SFP4_TX_N]
+#FMC1_HPC_DP7_M2C_P(N) in VC707 manual. FMC_SFP4_RX_P(N) in this project
+set_property PACKAGE_PIN E6 [get_ports FMC_SFP4_RX_P]
+set_property PACKAGE_PIN E5 [get_ports FMC_SFP4_RX_N]
+#FMC1_HPC_LA33_P in VC707 manual. FMC_SFP4_TX_DISABLE in this project
+set_property PACKAGE_PIN U31 [get_ports FMC_SFP4_TX_DISABLE]
+set_property IOSTANDARD LVCMOS18 [get_ports FMC_SFP4_TX_DISABLE]
+#FMC1_HPC_LA30_N in VC707 manual. FMC_SFP4_LOS in this project
+set_property PACKAGE_PIN V31 [get_ports FMC_SFP4_LOS]
+set_property IOSTANDARD LVCMOS18 [get_ports FMC_SFP4_LOS]
+#FMC1_HPC_LA31_P in VC707 manual. FMC_SFP4_RS in this project
+set_property PACKAGE_PIN M28 [get_ports FMC_SFP4_RS]
+set_property IOSTANDARD LVCMOS18 [get_ports FMC_SFP4_RS]
 
+#SFP7
+#FMC1_HPC_DP4_C2M_P(N) in VC707 manual. FMC_SFP7_TX_P(N)
+set_property PACKAGE_PIN J2 [get_ports FMC_SFP7_TX_P]
+set_property PACKAGE_PIN J1 [get_ports FMC_SFP7_TX_N]
+#FMC1_HPC_DP4_M2C_P(N) in VC707 manual. FMC_SFP7_RX_P(N)
+set_property PACKAGE_PIN H8 [get_ports FMC_SFP7_RX_P]
+set_property PACKAGE_PIN H7 [get_ports FMC_SFP7_RX_N]
+#FMC2_HPC_LA22_N in VC707 manual. FMC_SFP7_TX_DISABLE in this project
+set_property PACKAGE_PIN W33 [get_ports FMC_SFP7_TX_DISABLE]
+set_property IOSTANDARD LVCMOS18 [get_ports FMC_SFP7_TX_DISABLE]
+#FMC1_HPC_LA20_P in VC707 manual. FMC_SFP7_LOS in this project
+set_property PACKAGE_PIN Y29 [get_ports FMC_SFP7_LOS]
+set_property IOSTANDARD LVCMOS18 [get_ports FMC_SFP7_LOS]
+#FMC1_HPC_LA20_N in VC707 manual. FMC_SFP7_RS in this project
+set_property PACKAGE_PIN Y30 [get_ports FMC_SFP7_RS]
+set_property IOSTANDARD LVCMOS18 [get_ports FMC_SFP7_RS]

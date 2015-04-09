@@ -59,7 +59,6 @@
 
 `timescale 1ps/1ps
 
-(* dont_touch = "yes" *)
 module gig_ethernet_pcs_pma_0_reset_sync #(
   parameter INITIALISE = 2'b11
 )
@@ -70,24 +69,14 @@ module gig_ethernet_pcs_pma_0_reset_sync #(
 );
 
 
-  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
   wire  reset_stage1;
-
-  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
   wire  reset_stage2;
-
-  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
   wire  reset_stage3;
-
-  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
   wire  reset_stage4;
-
-  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
   wire  reset_stage5;
-
-  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
   wire  reset_stage6;
 
+  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
   FDP #(
    .INIT (INITIALISE[0])
   ) reset_sync1 (
@@ -97,6 +86,7 @@ module gig_ethernet_pcs_pma_0_reset_sync #(
   .Q  (reset_stage1) 
   );
   
+  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
   FDP #(
    .INIT (INITIALISE[1])
   ) reset_sync2 (
@@ -106,6 +96,7 @@ module gig_ethernet_pcs_pma_0_reset_sync #(
   .Q  (reset_stage2) 
   );
 
+  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
   FDP #(
    .INIT (INITIALISE[1])
   ) reset_sync3 (
@@ -115,6 +106,7 @@ module gig_ethernet_pcs_pma_0_reset_sync #(
   .Q  (reset_stage3) 
   );
 
+  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
   FDP #(
    .INIT (INITIALISE[1])
   ) reset_sync4 (
@@ -124,6 +116,7 @@ module gig_ethernet_pcs_pma_0_reset_sync #(
   .Q  (reset_stage4) 
   );
 
+  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
   FDP #(
    .INIT (INITIALISE[1])
   ) reset_sync5 (
@@ -133,6 +126,7 @@ module gig_ethernet_pcs_pma_0_reset_sync #(
   .Q  (reset_stage5) 
   );
 
+  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
   FDP #(
    .INIT (INITIALISE[1])
   ) reset_sync6 (

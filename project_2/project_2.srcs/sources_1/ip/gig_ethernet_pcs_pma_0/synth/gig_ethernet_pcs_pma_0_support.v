@@ -151,9 +151,6 @@ pcs_pma_block_i
       .rxp (rxp),                   // Differential +ve for serial reception from PMD to PMA.
       .rxn (rxn),                   // Differential -ve for serial reception from PMD to PMA.
 
-  
-   
-
       .txoutclk                             (txoutclk),
       .rxoutclk                             (rxoutclk),
       .resetdone                            (resetdone),
@@ -165,7 +162,6 @@ pcs_pma_block_i
       .independent_clock_bufg        (independent_clock_bufg),
       .pma_reset                            (pma_reset),
       .mmcm_locked                          (mmcm_locked),
-
 
       .gmii_txd                      (gmii_txd),
       .gmii_tx_en                    (gmii_tx_en),
@@ -187,12 +183,12 @@ pcs_pma_block_i
 
       // General IO's
       //-------------
-      .status_vector (status_vector),         // Core status.
-      .reset (reset),                 // Asynchronous reset for entire core.
+      .status_vector          (status_vector),         // Core status.
+      .reset                  (pma_reset),                 // Asynchronous reset for entire core.
       
-      .signal_detect                        (signal_detect) ,         // Input from PMD to indicate presence of optical input.
-      .gt0_qplloutclk_in                    (gt0_qplloutclk),                          
-      .gt0_qplloutrefclk_in                 (gt0_qplloutrefclk)
+      .signal_detect           (signal_detect) ,         // Input from PMD to indicate presence of optical input.
+      .gt0_qplloutclk_in       (gt0_qplloutclk),                          
+      .gt0_qplloutrefclk_in    (gt0_qplloutrefclk)
    );
 
 
@@ -210,13 +206,13 @@ pcs_pma_block_i
       .mmcm_locked               (mmcm_locked), 
       .userclk                   (userclk),
       .userclk2                  (userclk2),
-      .rxuserclk                   (rxuserclk),
-      .rxuserclk2                  (rxuserclk2)
+      .rxuserclk                 (rxuserclk),
+      .rxuserclk2                (rxuserclk2)
    );
 
-assign gtrefclk_out  = gtrefclk;
-assign userclk_out  = userclk;
-assign userclk2_out = userclk2;
+assign gtrefclk_out   = gtrefclk;
+assign userclk_out    = userclk;
+assign userclk2_out   = userclk2;
 assign rxuserclk_out  = rxuserclk;
 assign rxuserclk2_out = rxuserclk2;
 
@@ -238,13 +234,13 @@ assign pma_reset_out = pma_reset;
 
   gig_ethernet_pcs_pma_0_gt_common core_gt_common_i
 (
-     .gt0_gtrefclk0_common_in     (gtrefclk),
-     .gt0_qplloutclk              (gt0_qplloutclk),
-     .gt0_qplloutrefclk           (gt0_qplloutrefclk),
-     .gt0_qplllock_out            (),
-     .gt0_qplllockdetclk_in       (independent_clock_bufg),
-     .gt0_qpllrefclklost_out      (),
-     .gt0_qpllreset_in            (pma_reset)
+    .GTREFCLK0_IN                (gtrefclk) ,
+    .QPLLLOCK_OUT                (),
+    .QPLLLOCKDETCLK_IN           (independent_clock_bufg),
+    .QPLLOUTCLK_OUT              (gt0_qplloutclk),
+    .QPLLOUTREFCLK_OUT           (gt0_qplloutrefclk),
+    .QPLLREFCLKLOST_OUT          (),    
+    .QPLLRESET_IN                (pma_reset) 
 );
 
   assign   gt0_qplloutclk_out        = gt0_qplloutclk;

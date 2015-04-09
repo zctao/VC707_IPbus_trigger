@@ -2,7 +2,7 @@
 //   ____  ____ 
 //  /   /\/   /
 // /___/  \  /    Vendor: Xilinx
-// \   \   \/     Version : 3.2
+// \   \   \/     Version : 3.4
 //  \   \         Application : 7 Series FPGAs Transceivers Wizard
 //  /   /         Filename : gig_ethernet_pcs_pma_0_gtwizard_gt.v
 // /___/   /\     
@@ -227,6 +227,32 @@ module gig_ethernet_pcs_pma_0_GTWIZARD_GT #
     wire    [5:0]   txkerr_float_i;
     wire    [5:0]   txrundisp_float_i;
 wire            rxstartofseq_float_i;       
+(* equivalent_register_removal="no" *) reg [95:0]   cpllpd_wait    =  96'hFFFFFFFFFFFFFFFFFFFFFFFF;
+(* equivalent_register_removal="no" *) reg [127:0]  cpllreset_wait = 128'h000000000000000000000000000000FF;
+wire    cpllpd_ovrd_i ;
+wire    cpllreset_ovrd_i ;
+wire    cpll_reset_i;
+wire    cpllreset_sync;
+wire    cpllpd_sync;
+wire    cpll_pd_i;
+wire    ack_i;
+reg     flag = 1'b0;
+reg     flag2 = 1'b0;
+reg     ack_flag = 1'b0;
+  // Internal Signals
+  wire data_sync1;
+  wire data_sync2;
+  wire data_sync3;
+  wire data_sync4;
+  wire data_sync5;
+  wire data_sync6;
+  wire ack_sync1;
+  wire ack_sync2;
+  wire ack_sync3;
+  wire ack_sync4;
+  wire ack_sync5;
+  wire ack_sync6;
+wire    gtrefclk0_in_bufg;
 // 
 //********************************* Main Body of Code**************************
                        
@@ -407,7 +433,7 @@ wire            rxstartofseq_float_i;
             .GEARBOX_MODE                           (3'b000),
 
            //-----------------------PRBS Detection Attribute-----------------------
-            .RXPRBS_ERR_LOOPBACK                    (1'b1),
+            .RXPRBS_ERR_LOOPBACK                    (1'b0),
 
            //-----------Power-Down Attributes----------
             .PD_TRANS_TIME_FROM_P2                  (12'h03c),
@@ -417,7 +443,7 @@ wire            rxstartofseq_float_i;
            //-----------RX OOB Signaling Attributes----------
             .SAS_MAX_COM                            (64),
             .SAS_MIN_COM                            (36),
-            .SATA_BURST_SEQ_LEN                     (4'b1111),
+            .SATA_BURST_SEQ_LEN                     (4'b0101),
             .SATA_BURST_VAL                         (3'b100),
             .SATA_EIDLE_VAL                         (3'b100),
             .SATA_MAX_BURST                         (8),
@@ -532,10 +558,10 @@ wire            rxstartofseq_float_i;
         .CPLLLOCK                       (cplllock_out),
         .CPLLLOCKDETCLK                 (cplllockdetclk_in),
         .CPLLLOCKEN                     (tied_to_vcc_i),
-        .CPLLPD                         (tied_to_ground_i),
+        .CPLLPD                         (cpll_pd_i),
         .CPLLREFCLKLOST                 (cpllrefclklost_out),
         .CPLLREFCLKSEL                  (3'b001),
-        .CPLLRESET                      (cpllreset_in),
+        .CPLLRESET                      (cpll_reset_i),
         .GTRSVD                         (16'b0000000000000000),
         .PCSRSVDIN                      (16'b0000000000000000),
         .PCSRSVDIN2                     (5'b00000),
@@ -827,6 +853,162 @@ wire            rxstartofseq_float_i;
 
      );
      
+   BUFG  bufg_gtrefclk0_in (
+      .I         (gtrefclk0_in),
+      .O         (gtrefclk0_in_bufg)
+   );
+
+always @(posedge gtrefclk0_in_bufg)
+begin
+  cpllpd_wait <= {cpllpd_wait[94:0], 1'b0};
+  cpllreset_wait <= {cpllreset_wait[126:0], 1'b0};
+end
+
+assign cpllpd_ovrd_i = cpllpd_wait[95];
+assign cpllreset_ovrd_i = cpllreset_wait[127];
+
+assign cpll_pd_i = cpllpd_ovrd_i;
+
+always @(posedge cplllockdetclk_in)
+begin
+if(cpllreset_in == 1'b1 && ack_flag == 1'b0)
+begin
+    flag <= !flag;
+    flag2 <= 1'b1;
+end
+else
+begin
+    flag <= flag; 
+    flag2 <= 1'b0;
+end
+end
+
+
+always @(posedge cplllockdetclk_in)
+begin
+if(flag2 == 1'b1)
+ ack_flag <= 1'b1;
+else if(ack_i == 1'b1)
+ ack_flag <= 1'b0;
+end
+
+
+
+  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
+  FD #(
+    .INIT (1'b0)
+  ) data_sync_reg1 (
+    .C  (gtrefclk0_in_bufg),
+    .D  (flag),
+    .Q  (data_sync1)
+  );
+
+
+  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
+  FD #(
+   .INIT (1'b0)
+  ) data_sync_reg2 (
+  .C  (gtrefclk0_in_bufg),
+  .D  (data_sync1),
+  .Q  (data_sync2)
+  );
+
+
+  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
+  FD #(
+   .INIT (1'b0)
+  ) data_sync_reg3 (
+  .C  (gtrefclk0_in_bufg),
+  .D  (data_sync2),
+  .Q  (data_sync3)
+  );
+
+  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
+  FD #(
+   .INIT (1'b0)
+  ) data_sync_reg4 (
+  .C  (gtrefclk0_in_bufg),
+  .D  (data_sync3),
+  .Q  (data_sync4)
+  );
+
+  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
+  FD #(
+   .INIT (1'b0)
+  ) data_sync_reg5 (
+  .C  (gtrefclk0_in_bufg),
+  .D  (data_sync4),
+  .Q  (data_sync5)
+  );
+
+  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
+  FD #(
+   .INIT (1'b0)
+  ) data_sync_reg6 (
+  .C  (gtrefclk0_in_bufg),
+  .D  (data_sync5),
+  .Q  (data_sync6)
+  );
+
+assign cpllreset_sync = data_sync5 ^ data_sync6;
+
+  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
+  FD #(
+   .INIT (1'b0)
+  ) ack_sync_reg1 (
+  .C  (cplllockdetclk_in),
+  .D  (data_sync6),
+  .Q  (ack_sync1)
+  );
+
+  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
+  FD #(
+   .INIT (1'b0)
+  ) ack_sync_reg2 (
+  .C  (cplllockdetclk_in),
+  .D  (ack_sync1),
+  .Q  (ack_sync2)
+  );
+
+  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
+  FD #(
+   .INIT (1'b0)
+  ) ack_sync_reg3 (
+  .C  (cplllockdetclk_in),
+  .D  (ack_sync2),
+  .Q  (ack_sync3)
+  );
+
+  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
+  FD #(
+   .INIT (1'b0)
+  ) ack_sync_reg4 (
+  .C  (cplllockdetclk_in),
+  .D  (ack_sync3),
+  .Q  (ack_sync4)
+  );
+
+  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
+  FD #(
+   .INIT (1'b0)
+  ) ack_sync_reg5 (
+  .C  (cplllockdetclk_in),
+  .D  (ack_sync4),
+  .Q  (ack_sync5)
+  );
+
+  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
+  FD #(
+   .INIT (1'b0)
+  ) ack_sync_reg6 (
+  .C  (cplllockdetclk_in),
+  .D  (ack_sync5),
+  .Q  (ack_sync6)
+  );
+
+assign ack_i = ack_sync5 ^ ack_sync6;
+
+assign cpll_reset_i = cpllreset_sync || cpllreset_ovrd_i;
 endmodule     
 
  

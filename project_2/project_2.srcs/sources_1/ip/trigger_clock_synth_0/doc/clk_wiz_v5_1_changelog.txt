@@ -1,3 +1,12 @@
+2014.4:
+ * Version 5.1 (Rev. 5)
+ * Internal device family change, no functional changes
+ * updates related to the source selection based on board interface for zed board
+
+2014.3:
+ * Version 5.1 (Rev. 4)
+ * Option added to enable dynamic phase and duty cycle for resource optimization in AXI4-Lite interface
+
 2014.2:
  * Version 5.1 (Rev. 3)
  * Updated for AXI4-Lite interface locked status register address and bit mapping to align with the pg065

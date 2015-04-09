@@ -21,7 +21,21 @@ entity slaves is
 		pkt_rx: in std_logic := '0';
 		pkt_tx: in std_logic := '0';
 		en_proc_switch: in std_logic;
-		lcd: out std_logic_vector(6 downto 0)
+		lcd: out std_logic_vector(6 downto 0);
+		--sfp
+        sfp4_tx_n: out std_logic;
+        sfp4_tx_p: out std_logic;
+        sfp4_rx_n: in std_logic;
+        sfp4_rx_p: in std_logic;
+        sfp7_tx_n: out std_logic;
+        sfp7_tx_p: out std_logic;
+        sfp7_rx_n: in std_logic;
+        sfp7_rx_p: in std_logic;
+        --gt ref clk
+        gt_refclk_p: in std_logic;
+        gt_refclk_n: in std_logic;
+        --init clk
+        init_clk: in std_logic
 	);
 
 end slaves;
@@ -129,7 +143,21 @@ begin
 			ipbus_in => ipbw(6),
 			ipbus_out => ipbr(6),
 			en_proc_switch => en_proc_switch,
-			lcd => lcd
+			lcd => lcd,
+			--sfp
+            txn_pphi => sfp4_tx_n,
+            txp_pphi => sfp4_tx_p,
+            rxn_pphi => sfp4_rx_n,
+            rxp_pphi => sfp4_rx_p,
+            txn_mphi => sfp7_tx_n,
+            txp_mphi => sfp7_tx_p,
+            rxn_mphi => sfp7_rx_n,
+            rxp_mphi => sfp7_rx_p,
+            --gt ref clk
+            gt_refclk_p => gt_refclk_p,
+            gt_refclk_n => gt_refclk_n,
+            --init clk
+            init_clk => init_clk
 		);
 
 end rtl;

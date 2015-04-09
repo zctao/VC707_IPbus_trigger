@@ -3,7 +3,7 @@
 //   ____  ____ 
 //  /   /\/   /
 // /___/  \  /    Vendor: Xilinx
-// \   \   \/     Version : 3.2
+// \   \   \/     Version : 3.4
 //  \   \         Application : 7 Series FPGAs Transceivers Wizard
 //  /   /         Filename : gig_ethernet_pcs_pma_0_gtwizard_multi_gt.v
 // /___/   /\     

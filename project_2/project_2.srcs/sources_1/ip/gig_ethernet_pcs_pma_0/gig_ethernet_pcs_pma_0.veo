@@ -46,7 +46,7 @@
 // 
 // DO NOT MODIFY THIS FILE.
 
-// IP VLNV: xilinx.com:ip:gig_ethernet_pcs_pma:14.2
+// IP VLNV: xilinx.com:ip:gig_ethernet_pcs_pma:14.3
 // IP Revision: 1
 
 // The following must be inserted into your Verilog file for this

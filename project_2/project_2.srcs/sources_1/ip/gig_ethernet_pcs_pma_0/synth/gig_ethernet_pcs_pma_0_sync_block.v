@@ -59,7 +59,6 @@
 
 `timescale 1ps / 1ps
 
-(* dont_touch = "yes" *)
 module gig_ethernet_pcs_pma_0_sync_block #(
   parameter INITIALISE = 2'b00
 )

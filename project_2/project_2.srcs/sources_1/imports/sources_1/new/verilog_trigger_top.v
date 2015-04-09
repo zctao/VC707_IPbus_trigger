@@ -36,7 +36,22 @@ module verilog_trigger_top(
     output wire ipb_ack,                // 'write' data has been stored, 'read' data is ready
     output wire ipb_err,                    // '1' if error, '0' if OK?
     input wire en_proc_switch ,
-    output wire [6:0] lcd  
+    output wire [6:0] lcd,
+    
+    // links
+    output wire txn_pphi,
+    output wire txp_pphi,
+    input  wire rxn_pphi,
+    input  wire rxp_pphi,
+    output wire txn_mphi,
+    output wire txp_mphi,
+    input  wire rxn_mphi,
+    input  wire rxp_mphi,
+    //gt reference clock
+    input wire gt_refclk_p,
+    input wire gt_refclk_n,
+    //initial clock
+    input wire init_clk  
     );
     
     // Convert the 200 MHz clock to something representing 40 MHz bunch crossing clock,
@@ -149,8 +164,21 @@ module verilog_trigger_top(
         .BX(BX),
         .first_clk(first_clk),
         .not_first_clk(not_first_clk),
-        .lcd(lcd)
-        
+        .lcd(lcd),
+        //Links
+        .txn_pphi(txn_pphi),
+        .txp_pphi(txp_pphi),
+        .rxn_pphi(rxn_pphi),
+        .rxp_pphi(rxp_pphi),
+        .txn_mphi(txn_mphi),
+        .txp_mphi(txp_mphi),
+        .rxn_mphi(rxn_mphi),
+        .rxp_mphi(rxp_mphi),
+        //gt reference clock
+        .gt_refclk_p(gt_refclk_p),
+        .gt_refclk_n(gt_refclk_n),
+        //initial clock
+        .init_clk(init_clk)
         );    
         
 //       Tracklet_Layer_Router layer_router(

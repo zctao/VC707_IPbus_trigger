@@ -42,7 +42,21 @@ module Tracklet_Baseline(
     input wire first_clk,
     input wire not_first_clk,
     
-    output reg [6:0] lcd
+    output reg [6:0] lcd,
+    
+    // links
+    output wire txn_pphi,          //Links to neighbouring sector board with larger phi (+phi)
+    output wire txp_pphi,          //Links to neighbouring sector board with larger phi (+phi)
+    input  wire rxn_pphi,          //Links to neighbouring sector board with larger phi (+phi)
+    input  wire rxp_pphi,          //Links to neighbouring sector board with larger phi (+phi)
+    output wire txn_mphi,          //Links to neighbouring sector board with smaller phi (-phi)
+    output wire txp_mphi,          //Links to neighbouring sector board with smaller phi (-phi)
+    input  wire rxn_mphi,          //Links to neighbouring sector board with smaller phi (-phi)
+    input  wire rxp_mphi,          //Links to neighbouring sector board with smaller phi (-phi)    
+    //clock
+    input wire gt_refclk_p,
+    input wire gt_refclk_n,
+    input wire init_clk
     );
 
     // Address bits "io_addr[31:30] = 2'b01" are consumed when selecting 'slave6'
@@ -964,7 +978,7 @@ module Tracklet_Baseline(
     .not_first_clk(not_first_clk));
  
  
-/*    Aurora_test aurora_test_top(
+    Aurora_test aurora_test_top(
         // clocks and reset
         .clk(clk),                // processing clock
         .reset(reset),                        // active HI
@@ -993,9 +1007,11 @@ module Tracklet_Baseline(
         .txn_mphi(txn_mphi),
         .rxp_mphi(rxp_mphi),
         .rxn_mphi(rxn_mphi),
-        .gt_refclk(gt_refclk),
+        //clock
+        .gt_refclk_p(gt_refclk_p),
+        .gt_refclk_n(gt_refclk_n),
         .init_clk(init_clk)
-    );*/
+    );
  
     // readback mux
     // If a particular block is addressed, connect that block's signals
@@ -1007,7 +1023,7 @@ module Tracklet_Baseline(
     reg io_rd_ack_reg;
     assign io_rd_ack = io_rd_ack_reg;
     always @ (posedge io_clk) begin
-        io_rd_ack_reg <= InputLink_R1Link1_io_rd_ack | TrackFit_TF_L1L2_io_rd_ack | lcd_io_rd_ack;// | Aurora_test_io_rd_ack;
+        io_rd_ack_reg <= InputLink_R1Link1_io_rd_ack | TrackFit_TF_L1L2_io_rd_ack | lcd_io_rd_ack | Aurora_test_io_rd_ack;
     end
     // Route the selected register to the 'rdbk' output.
     always @(posedge io_clk) begin

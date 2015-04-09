@@ -41,11 +41,29 @@ entity top is
         sfp_los, sfp_mod_det: in std_logic;   
         --sfp_rs0, sfp_rs1: out std_logic;        
         sfp_tx_disable: out std_logic;  
+        
+        --FMC GT & SFPS        
+        FMC1_GBTCLK1_P: in std_logic;
+        FMC1_GBTCLK1_N: in std_logic;
+         
+        FMC_SFP4_LOS: in std_logic;
+        FMC_SFP4_RS: out std_logic;
+        FMC_SFP4_TX_DISABLE: out std_logic;
+        FMC_SFP4_RX_N, FMC_SFP4_RX_P: in std_logic;
+        FMC_SFP4_TX_N, FMC_SFP4_TX_P: out std_logic;
+        
+        FMC_SFP7_LOS: in std_logic;
+        FMC_SFP7_RS: out std_logic;
+        FMC_SFP7_TX_DISABLE: out std_logic;
+        FMC_SFP7_RX_N, FMC_SFP7_RX_P: in std_logic;
+        FMC_SFP7_TX_N, FMC_SFP7_TX_P: out std_logic;
+        
         -- LEDs
         leds: out std_logic_vector(7 downto 0);
         -- Switch
         en_proc_switch: in std_logic;
         lcd: out std_logic_vector(6 downto 0)
+
     );
 end top;
 
@@ -74,6 +92,14 @@ architecture rtl of top is
 begin
 
     -- value initialization
+    FMC_SFP4_RS <= '0';
+    FMC_SFP4_TX_DISABLE <= '0';
+    --light_detect <= not FMC_SFP4_LOS
+
+    FMC_SFP7_RS <= '0';
+    FMC_SFP7_TX_DISABLE <= '0';
+    --light_detect <= not FMC_SFP7_LOS
+    
     --sfp_rs0 <= '0';                       -- for AFBR-703SDDZ, sets 1.25 Gbps
     --sfp_rs1 <= '0';                       --
     sfp_tx_disable <= '0';
@@ -83,7 +109,7 @@ begin
     leds <= (onehz,lcd_bits(0),lcd_bits(1),lcd_bits(2),lcd_bits(3),lcd_bits(4),lcd_bits(5),lcd_bits(6));
     lcd <= lcd_bits;
     mac_addr <= X"000a3502c9aa";          -- from the sticker on the board ...
-    ip_addr <= X"c0a8006f";               -- 192.168.0.111
+    ip_addr <= X"c0a80075";               -- 192.168.0.117  IP address assigned to VC707 (192.168.0.111 for VC709)
   
     --	DCM clock generation for internal bus, ethernet
     clocks: entity work.clocks_7s_serdes
@@ -167,7 +193,21 @@ begin
         pkt_tx => pkt_tx,
         -- en proc switch
         en_proc_switch => en_proc_switch,
-        lcd => lcd_bits
+        lcd => lcd_bits,
+        --interboard links
+        sfp4_tx_n => FMC_SFP4_TX_N,
+        sfp4_tx_p => FMC_SFP4_TX_P,
+        sfp4_rx_n => FMC_SFP4_RX_N,
+        sfp4_rx_p => FMC_SFP4_RX_P,
+        sfp7_tx_n => FMC_SFP7_TX_N,
+        sfp7_tx_p => FMC_SFP7_TX_P,
+        sfp7_rx_n => FMC_SFP7_RX_N,
+        sfp7_rx_p => FMC_SFP7_RX_P,
+        --gt ref clk
+        gt_refclk_p => FMC1_GBTCLK1_P,
+        gt_refclk_n => FMC1_GBTCLK1_N,   
+        --init clk
+        init_clk => clk125
       );
 
 

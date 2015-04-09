@@ -1,4 +1,30 @@
 Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2014.4 (win64) Build 1071353 Tue Nov 18 18:24:04 MST 2014
+| Date         : Wed Apr 08 12:19:36 2015
+| Host         : PCPSB375 running 64-bit Service Pack 1  (build 7601)
+| Command      : upgrade_ip
+| Device       : xc7vx485tffg1761-2
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'gig_ethernet_pcs_pma_0'
+
+1. Summary
+----------
+
+SUCCESS in the upgrade of gig_ethernet_pcs_pma_0 from xilinx.com:ip:gig_ethernet_pcs_pma:14.2 (Rev. 1) to xilinx.com:ip:gig_ethernet_pcs_pma:14.3 (Rev. 1)
+
+2. Upgrade messages
+-------------------
+
+Added parameter Transceiver_type with value GTXE2
+
+
+
+
+
+
+Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------
 | Tool Version : Vivado v.2014.2 (win64) Build 932637 Wed Jun 11 13:33:10 MDT 2014
 | Date         : Tue Mar 10 11:24:40 2015

@@ -1,3 +1,8 @@
+ 
+ 
+ 
+ 
+ 
 ################################################################################
 # (c) Copyright 2009 - 2013 Xilinx, Inc. All rights reserved.
 # 
@@ -46,6 +51,10 @@
 # PART OF THIS FILE AT ALL TIMES.
 #
 ################################################################################
+
+#  CONSTANT C_PRIM_DEPTH    : integer := get_fifo_sizes(c_family, C_PRIM_FIFO_TYPE, C_USE_ECC,0);
+#  CONSTANT C_NUM_PRIM_DEEP  : integer := divroundup(C_WR_DEPTH,C_PRIM_DEPTH);
+
 #------------------------------------------------------------------------------#
 #                         Native FIFO Constraints                              #
 #------------------------------------------------------------------------------#
@@ -56,5 +65,6 @@
 set_false_path -through [get_ports rst] -to [get_pins -hierarchical -filter {NAME =~ *rstbt*/*PRE}]  
 set_false_path -from [get_cells -hierarchical -filter {NAME =~ *rstbt*/*rst_reg[*]}]
 set_false_path -from [get_cells -hierarchical -filter {NAME =~ *rstbt*/*rst_reg_reg}]
+
 
 ################################################################################

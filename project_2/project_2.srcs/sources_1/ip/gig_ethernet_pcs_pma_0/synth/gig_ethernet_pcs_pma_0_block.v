@@ -190,7 +190,7 @@ module gig_ethernet_pcs_pma_0_block
    //---------------------------------------------------------------------------
    // Instantiate the core
    //---------------------------------------------------------------------------
-   gig_ethernet_pcs_pma_v14_2 #(
+   gig_ethernet_pcs_pma_v14_3 #(
        .C_ELABORATION_TRANSIENT_DIR ("BlankString"),
        .C_COMPONENT_NAME            ("gig_ethernet_pcs_pma_0"),
        .C_FAMILY                    ("virtex7"),
@@ -339,14 +339,14 @@ transceiver_inst (
       .gt0_rxcdrhold_in             (1'b0),
       .gt0_dmonitorout_out          (),      
       
-      .resetdone             (),
-      .gt0_qplloutclk(gt0_qplloutclk_in),                          
-      .gt0_qplloutrefclk(gt0_qplloutrefclk_in)
+      .resetdone                    (),
+      .gt0_qplloutclk               (gt0_qplloutclk_in),                          
+      .gt0_qplloutrefclk            (gt0_qplloutrefclk_in)
    );
 
 
-assign resetdone = gt0_txresetdone_out_i & gt0_rxresetdone_out_i;
-assign reset_done = gt0_txresetdone_out_i & gt0_rxresetdone_out_i;
+  assign resetdone  = reset_done_i;
+  assign reset_done = gt0_txresetdone_out_i & gt0_rxresetdone_out_i;
 
 gig_ethernet_pcs_pma_0_sync_block sync_block_reset_done
         (
@@ -356,11 +356,8 @@ gig_ethernet_pcs_pma_0_sync_block sync_block_reset_done
         );
 
 
-
   // Unused
-  assign rxbufstatus[0] = 1'b0;
-
-
+  assign rxbufstatus[0]           = 1'b0;
 
 
   //GT output cannot drive a BUFR directly so connecting to it through a BUFMR
@@ -377,7 +374,7 @@ gig_ethernet_pcs_pma_0_sync_block sync_block_reset_done
       .CLR (1'b0)
    );
 
-assign   rxoutclk = rxoutclk_buf ;
+  assign rxoutclk = rxoutclk_buf ;
 
 endmodule // gig_ethernet_pcs_pma_0_block
 
