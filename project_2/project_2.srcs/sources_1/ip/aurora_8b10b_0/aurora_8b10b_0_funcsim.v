@@ -1,10 +1,10 @@
 // Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
-// Tool Version: Vivado v.2014.4 (win64) Build 1071353 Tue Nov 18 18:24:04 MST 2014
-// Date        : Thu Apr 09 16:02:47 2015
-// Host        : PCPSB375 running 64-bit Service Pack 1  (build 7601)
+// Tool Version: Vivado v.2014.4 (win64) Build 1071353 Tue Nov 18 18:29:27 MST 2014
+// Date        : Thu Apr 09 18:39:38 2015
+// Host        : 0602-PC running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim
-//               c:/Users/ZhengchengTao/Documents/VC707_IPbus_trigger/project_2/project_2.srcs/sources_1/ip/aurora_8b10b_0/aurora_8b10b_0_funcsim.v
+//               E:/ztaotest/VC707_IPbus_trigger/project_2/project_2.srcs/sources_1/ip/aurora_8b10b_0/aurora_8b10b_0_funcsim.v
 // Design      : aurora_8b10b_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.

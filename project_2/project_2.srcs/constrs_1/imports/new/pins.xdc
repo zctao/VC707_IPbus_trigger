@@ -80,6 +80,12 @@ set_property IOSTANDARD LVCMOS18 [get_ports {leds[7]}]
 set_property PACKAGE_PIN AU38 [get_ports en_proc_switch]
 set_property IOSTANDARD LVCMOS18 [get_ports en_proc_switch]
 
+#GPIO_DIP_SW
+set_property PACKAGE_PIN AV30 [get_ports GPIO_DIP_SW0]
+set_property IOSTANDARD LVCMOS18 [get_ports GPIO_DIP_SW0]
+set_property PACKAGE_PIN AY33 [get_ports GPIO_DIP_SW1]
+set_property IOSTANDARD LVCMOS18 [get_ports GPIO_DIP_SW1]
+
 #LCD
 #RS
 set_property PACKAGE_PIN AN41 [get_ports {lcd[0]}] 
@@ -132,8 +138,8 @@ set_property PACKAGE_PIN J1 [get_ports FMC_SFP7_TX_N]
 #FMC1_HPC_DP4_M2C_P(N) in VC707 manual. FMC_SFP7_RX_P(N)
 set_property PACKAGE_PIN H8 [get_ports FMC_SFP7_RX_P]
 set_property PACKAGE_PIN H7 [get_ports FMC_SFP7_RX_N]
-#FMC2_HPC_LA22_N in VC707 manual. FMC_SFP7_TX_DISABLE in this project
-set_property PACKAGE_PIN W33 [get_ports FMC_SFP7_TX_DISABLE]
+#FMC1_HPC_LA22_N in VC707 manual. FMC_SFP7_TX_DISABLE in this project
+set_property PACKAGE_PIN P28 [get_ports FMC_SFP7_TX_DISABLE]
 set_property IOSTANDARD LVCMOS18 [get_ports FMC_SFP7_TX_DISABLE]
 #FMC1_HPC_LA20_P in VC707 manual. FMC_SFP7_LOS in this project
 set_property PACKAGE_PIN Y29 [get_ports FMC_SFP7_LOS]
@@ -141,3 +147,29 @@ set_property IOSTANDARD LVCMOS18 [get_ports FMC_SFP7_LOS]
 #FMC1_HPC_LA20_N in VC707 manual. FMC_SFP7_RS in this project
 set_property PACKAGE_PIN Y30 [get_ports FMC_SFP7_RS]
 set_property IOSTANDARD LVCMOS18 [get_ports FMC_SFP7_RS]
+
+#FMC_LEDs
+#FMC1_HPC_LA18_CC_P in HPC connection. LED-D1 on FMC. fmc_leds[0] in this project
+set_property PACKAGE_PIN M32 [get_ports {fmc_leds[0]}]
+set_property IOSTANDARD LVCMOS18 [get_ports {fmc_leds[0]}]
+#FMC1_HPC_LA18_CC_N in HPC connection. LED-D2 on FMC. fmc_leds[1] in this project
+set_property PACKAGE_PIN L32 [get_ports {fmc_leds[1]}]
+set_property IOSTANDARD LVCMOS18 [get_ports {fmc_leds[1]}]
+#FMC1_HPC_LA19_P in HPC connection. LED-D3 on FMC. fmc_leds[2] in this project
+set_property PACKAGE_PIN W30 [get_ports {fmc_leds[2]}]
+set_property IOSTANDARD LVCMOS18 [get_ports {fmc_leds[2]}]
+#FMC1_HPC_LA19_N in HPC connection. LED-D4 on FMC. fmc_leds[3] in this project
+set_property PACKAGE_PIN W31 [get_ports {fmc_leds[3]}]
+set_property IOSTANDARD LVCMOS18 [get_ports {fmc_leds[3]}]
+#FMC1_HPC_HA00_CC_N in HPC connection. LED-D5 on FMC. fmc_leds[4] in this project
+set_property PACKAGE_PIN E35 [get_ports {fmc_leds[4]}]
+set_property IOSTANDARD LVCMOS18 [get_ports {fmc_leds[4]}]
+#FMC1_HPC_HA00_CC_P in HPC connection. LED-D6 on FMC. fmc_leds[5] in this project
+set_property PACKAGE_PIN E34 [get_ports {fmc_leds[5]}]
+set_property IOSTANDARD LVCMOS18 [get_ports {fmc_leds[5]}]
+#FMC1_HPC_HA01_CC_N in HPC connection. LED-D7 on FMC. fmc_leds[6] in this project
+set_property PACKAGE_PIN D36 [get_ports {fmc_leds[6]}]
+set_property IOSTANDARD LVCMOS18 [get_ports {fmc_leds[6]}]
+#FMC1_HPC_HA01_CC_P in HPC connection. LED-D8 on FMC. fmc_leds[7] in this project
+set_property PACKAGE_PIN D35 [get_ports {fmc_leds[7]}]
+set_property IOSTANDARD LVCMOS18 [get_ports {fmc_leds[7]}]

@@ -58,10 +58,17 @@ entity top is
         FMC_SFP7_RX_N, FMC_SFP7_RX_P: in std_logic;
         FMC_SFP7_TX_N, FMC_SFP7_TX_P: out std_logic;
         
+        -- FMC LEDs
+        fmc_leds: out std_logic_vector(7 downto 0);
+        
         -- LEDs
         leds: out std_logic_vector(7 downto 0);
         -- Switch
         en_proc_switch: in std_logic;
+        
+        GPIO_DIP_SW0: in std_logic;
+        GPIO_DIP_SW1: in std_logic;
+        
         lcd: out std_logic_vector(6 downto 0)
 
     );
@@ -85,6 +92,7 @@ architecture rtl of top is
     signal ip_addr: std_logic_vector(31 downto 0);
     signal pkt_rx, pkt_tx, pkt_rx_led, pkt_tx_led, sys_rst: std_logic;	
     signal light_detect: std_logic;
+    signal fmc4_light_detect, fmc7_light_detect: std_logic;
     signal link_status: std_logic; 
     signal eth_phy_status_vector: std_logic_vector(15 downto 0);
     signal gtrefclk_out, eth_link_status: std_logic;  
@@ -94,11 +102,11 @@ begin
     -- value initialization
     FMC_SFP4_RS <= '0';
     FMC_SFP4_TX_DISABLE <= '0';
-    --light_detect <= not FMC_SFP4_LOS
+    fmc4_light_detect <= not FMC_SFP4_LOS;
 
     FMC_SFP7_RS <= '0';
     FMC_SFP7_TX_DISABLE <= '0';
-    --light_detect <= not FMC_SFP7_LOS
+    fmc7_light_detect <= not FMC_SFP7_LOS;
     
     --sfp_rs0 <= '0';                       -- for AFBR-703SDDZ, sets 1.25 Gbps
     --sfp_rs1 <= '0';                       --
@@ -106,7 +114,9 @@ begin
     light_detect <= not sfp_los;
     locked <= clk_locked and eth_locked;
     --leds <= (pkt_rx_led, pkt_tx_led, clkdiv_locked, clk_locked, eth_locked, onehz, light_detect, en_proc_switch);
-    leds <= (onehz,lcd_bits(0),lcd_bits(1),lcd_bits(2),lcd_bits(3),lcd_bits(4),lcd_bits(5),lcd_bits(6));
+    --leds <= (onehz,lcd_bits(0),lcd_bits(1),lcd_bits(2),lcd_bits(3),lcd_bits(4),lcd_bits(5),lcd_bits(6));
+    leds <= (pkt_rx_led, pkt_tx_led, eth_locked, onehz, light_detect, fmc4_light_detect, fmc7_light_detect, en_proc_switch);
+    fmc_leds <= (fmc4_light_detect, fmc7_light_detect, GPIO_DIP_SW1, GPIO_DIP_SW0, '0', '0', '0', '0');  --two of the leds on FMC connected to two GPIO switches on VC707 board. Two of the leds on FMC show light detections of the SFP ports in use
     lcd <= lcd_bits;
     mac_addr <= X"000a3502c9aa";          -- from the sticker on the board ...
     ip_addr <= X"c0a80075";               -- 192.168.0.117  IP address assigned to VC707 (192.168.0.111 for VC709)
