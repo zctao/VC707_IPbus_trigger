@@ -28,7 +28,10 @@ entity ipbus_trigger_top is
         gt_refclk_p: in std_logic;
         gt_refclk_n: in std_logic;
         --init clk
-        init_clk: in std_logic
+        init_clk: in std_logic;
+        --tvalid signal output for timing measurement
+        tx_tvalid_out: out std_logic;
+        rx_tvalid_out: out std_logic
 	);
 	
 end ipbus_trigger_top;
@@ -64,7 +67,10 @@ component verilog_trigger_top
     gt_refclk_p: in std_logic;
     gt_refclk_n: in std_logic;
     --init clk
-    init_clk: in std_logic
+    init_clk: in std_logic;
+    --tvalid signal output for timing measurement
+    tx_tvalid_out: out std_logic;
+    rx_tvalid_out: out std_logic
   );
 end component;
 
@@ -137,7 +143,10 @@ begin
        gt_refclk_p => gt_refclk_p,
        gt_refclk_n => gt_refclk_n,
        --init clk
-       init_clk => init_clk
+       init_clk => init_clk,
+       --tvalid output signals for timing measurement
+       tx_tvalid_out => tx_tvalid_out,
+       rx_tvalid_out => rx_tvalid_out
       );
 
 end rtl;

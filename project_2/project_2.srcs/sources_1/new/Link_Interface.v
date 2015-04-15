@@ -156,14 +156,23 @@ module Link_Interface(
     
     //readout from tx fifo
     always @ (posedge clk) begin
-        if (m_axis_rx_tvalid) begin
-            rxdata3_reg <= m_axis_rx_tdata;
-            rxdata2_reg <= rxdata3_reg;
-            rxdata1_reg <= rxdata2_reg;
+        if (!axis_resetn) begin  //axis_resetn = !link_rst
+            rxdata3_reg <= 0;
+            rxdata2_reg <= 0;
+            rxdata1_reg <= 0;
+            rxstat3_reg <= 0;
+            rxstat2_reg <= 0;
+            rxstat1_reg <= 0;
+        end else begin
+            if (m_axis_rx_tvalid) begin
+                rxdata3_reg <= m_axis_rx_tdata;
+                rxdata2_reg <= rxdata3_reg;
+                rxdata1_reg <= rxdata2_reg;
             
-            rxstat3_reg <= {12'b0, m_axis_rx_tvalid, m_axis_rx_tkeep[0:1], m_axis_rx_tlast};
-            rxstat2_reg <= rxstat3_reg;
-            rxstat1_reg <= rxstat2_reg;
+                rxstat3_reg <= {12'b0, m_axis_rx_tvalid, m_axis_rx_tkeep[0:1], m_axis_rx_tlast};
+                rxstat2_reg <= rxstat3_reg;
+                rxstat1_reg <= rxstat2_reg;
+            end        
         end
     end
 

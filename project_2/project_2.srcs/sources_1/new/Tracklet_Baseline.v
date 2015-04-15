@@ -56,7 +56,10 @@ module Tracklet_Baseline(
     //clock
     input wire gt_refclk_p,
     input wire gt_refclk_n,
-    input wire init_clk
+    input wire init_clk,
+    //tvalid signal output for timing measurements
+    output wire tx_tvalid_out,
+    output wire rx_tvalid_out
     );
 
     // Address bits "io_addr[31:30] = 2'b01" are consumed when selecting 'slave6'
@@ -1010,7 +1013,10 @@ module Tracklet_Baseline(
         //clock
         .gt_refclk_p(gt_refclk_p),
         .gt_refclk_n(gt_refclk_n),
-        .init_clk(init_clk)
+        .init_clk(init_clk),
+        //tvalid signal output for timing measurement with scope
+        .tx_tvalid_out(tx_tvalid_out),
+        .rx_tvalid_out(rx_tvalid_out)
     );
  
     // readback mux

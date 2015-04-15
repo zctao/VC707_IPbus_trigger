@@ -69,6 +69,10 @@ entity top is
         GPIO_DIP_SW0: in std_logic;
         GPIO_DIP_SW1: in std_logic;
         
+        -- tvalid signal output for timing measurement with scope
+        tx_tvalid_out: out std_logic;
+        rx_tvalid_out: out std_logic;
+        
         lcd: out std_logic_vector(6 downto 0)
 
     );
@@ -217,7 +221,10 @@ begin
         gt_refclk_p => FMC1_GBTCLK1_P,
         gt_refclk_n => FMC1_GBTCLK1_N,   
         --init clk
-        init_clk => clk125
+        init_clk => clk125,
+        --tvalid output signals for timing measurement
+        tx_tvalid_out => tx_tvalid_out,
+        rx_tvalid_out => rx_tvalid_out
       );
 
 

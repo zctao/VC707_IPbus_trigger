@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Memory #(parameter RAM_WIDTH = 36, parameter RAM_ADDR_BITS = 9, parameter INIT_FILE = "E:/ztaotest/VC707_IPbus_trigger/project_2/empty.txt" )(
+module Memory #(parameter RAM_WIDTH = 36, parameter RAM_ADDR_BITS = 9, parameter INIT_FILE = "C:/Users/ZhengchengTao/Documents/VC707_IPbus_trigger/project_2/empty.txt" )(
     // Output
 	output reg [RAM_WIDTH-1:0] output_data,
 	// Input

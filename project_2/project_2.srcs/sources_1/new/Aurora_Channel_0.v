@@ -45,6 +45,7 @@ module Aurora_Channel_0(
     output wire gt0_qpllreset,               // output
     //signal output for timer
     output wire aurora_user_clk_out,
+    output wire aurora_reset_out,
     output wire local_tx_tvalid_out,
     output wire local_rx_tvalid_out
      
@@ -100,6 +101,7 @@ module Aurora_Channel_0(
     //timer ports
     assign local_tx_tvalid_out = local_axis_tx_tvalid;
     assign local_rx_tvalid_out = local_axis_rx_tvalid;
+    assign aurora_reset_out = sys_reset_out;
       
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // ipbus interface for aurora data sending and receiving

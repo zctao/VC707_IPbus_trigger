@@ -51,7 +51,10 @@ module verilog_trigger_top(
     input wire gt_refclk_p,
     input wire gt_refclk_n,
     //initial clock
-    input wire init_clk  
+    input wire init_clk,
+    //tvalid signal output for timing measurements
+    output wire tx_tvalid_out,
+    output wire rx_tvalid_out  
     );
     
     // Convert the 200 MHz clock to something representing 40 MHz bunch crossing clock,
@@ -178,7 +181,10 @@ module verilog_trigger_top(
         .gt_refclk_p(gt_refclk_p),
         .gt_refclk_n(gt_refclk_n),
         //initial clock
-        .init_clk(init_clk)
+        .init_clk(init_clk),
+        //tvalid signal output for timing measurement with scope
+        .tx_tvalid_out(tx_tvalid_out),
+        .rx_tvalid_out(rx_tvalid_out)
         );    
         
 //       Tracklet_Layer_Router layer_router(

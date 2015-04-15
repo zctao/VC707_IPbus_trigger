@@ -173,3 +173,10 @@ set_property IOSTANDARD LVCMOS18 [get_ports {fmc_leds[6]}]
 #FMC1_HPC_HA01_CC_P in HPC connection. LED-D8 on FMC. fmc_leds[7] in this project
 set_property PACKAGE_PIN D35 [get_ports {fmc_leds[7]}]
 set_property IOSTANDARD LVCMOS18 [get_ports {fmc_leds[7]}]
+
+#tvalid signal output for timing measurement with scope
+#USER_SMA_GPIO_P(N) in VC707 manual. tx(rx)_tvalid_out in this project
+set_property PACKAGE_PIN AN31 [get_ports tx_tvalid_out]
+set_property IOSTANDARD LVCMOS18 [get_ports tx_tvalid_out]
+set_property PACKAGE_PIN AP31 [get_ports rx_tvalid_out]
+set_property IOSTANDARD LVCMOS18 [get_ports rx_tvalid_out]

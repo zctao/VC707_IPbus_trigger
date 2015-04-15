@@ -53,7 +53,10 @@ module Aurora_test(
     //clocks
     input wire gt_refclk_p,
     input wire gt_refclk_n,
-    input wire init_clk
+    input wire init_clk,
+    //signal output for timing measurements with scope
+    output wire tx_tvalid_out,
+    output wire rx_tvalid_out
     
     );
     
@@ -76,6 +79,13 @@ module Aurora_test(
     wire link_rst_sel, fsm_en_sel;
     reg  link_rst;
     reg [1:0] fsm_en;
+
+    //assign tvalid signal output for timing measurement with scope
+    assign tx_tvalid_out = tx_tvalid_pphi;
+    assign rx_tvalid_out = rx_tvalid_mphi;
+    // for timing measurement in the other direction
+    //assign tx_tvalid_out = tx_tvalid_mphi;
+    //assign rx_tvalid_out = rx_tvalid_pphi;
 
     //Address assignments
     //top eight bits [31:24] already consumed. 5a for Aurora test module
@@ -154,7 +164,8 @@ module Aurora_test(
         .gt_qpllrefclk_quad(1'b0),          // input
         .gt0_qpllreset(),                    // output
         //timer ports
-        .aurora_user_clk_out(),
+        .aurora_user_clk_out(aurora_user_clk_pphi),
+        .aurora_reset_out(aurora_reset_pphi),
         .local_tx_tvalid_out(tx_tvalid_pphi),
         .local_rx_tvalid_out(rx_tvalid_pphi)
       
@@ -208,7 +219,8 @@ module Aurora_test(
         .gt_qpllrefclk_quad(1'b0),          // input
         .gt0_qpllreset(),                    // output
         //timer ports
-        .aurora_user_clk_out(),
+        .aurora_user_clk_out(aurora_user_clk_mphi),
+        .aurora_reset_out(aurora_reset_mphi),
         .local_tx_tvalid_out(tx_tvalid_mphi),
         .local_rx_tvalid_out(rx_tvalid_mphi)
       
@@ -226,16 +238,16 @@ module Aurora_test(
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Timers
     CLK_Counter timer_p2m (
-        .clk(init_clk),
-        .reset(rst_init),
+        .clk(aurora_user_clk_pphi),
+        .reset(aurora_reset_pphi),
         .start(tx_tvalid_pphi),
         .stop(rx_tvalid_mphi),
         .out(timer_out_p2m)
     );
     
     CLK_Counter timer_m2p (
-        .clk(init_clk),
-        .reset(rst_init),
+        .clk(aurora_user_clk_mphi),
+        .reset(aurora_reset_mphi),
         .start(tx_tvalid_mphi),
         .stop(rx_tvalid_pphi),
         .out(timer_out_m2p)
