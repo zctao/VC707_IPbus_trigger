@@ -32,8 +32,8 @@ module Aurora_Channel_0(
     input wire gt_reset_in,
     input wire gt_refclk,
     input wire axis_resetn,                  //system side reset for fifo
-    //state machine enable
-    input wire fsm_en,
+    //link enable
+    input wire link_en,
     //serial I/O pins
     input wire rxp, rxn,
     output wire txp, txn,
@@ -126,7 +126,7 @@ module Aurora_Channel_0(
         .axis_resetn(axis_resetn),                            // input, reset from system side
         .local_axis_resetn(local_axis_resetn),                // input, reset from aurora side
         //enable
-        .fsm_en(fsm_en),
+        .link_en(link_en),
         //tx ports
         .local_axis_tx_tvalid(local_axis_tx_tvalid),          // output to aurora s_axi_tx_tvalid
         .local_axis_tx_tdata(local_axis_tx_tdata),            // output to aurora s_axi_tx_tdata

@@ -23,13 +23,6 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/new/Data_FSM.v">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
       <File Path="$PSRCDIR/sources_1/new/aurora_8b10b_cdc_sync_exdes.v">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -736,6 +729,13 @@
           <Attr Name="ImportPath" Val="$PPRDIR/../../../../../USER_LOCAL/crs/CMS_trigger/Xilinx/VC709_trigger/jectest/viv_1/project_2/project_2.srcs/sources_1/VC709_ipbus/top/top_vc709_basex.vhd"/>
           <Attr Name="ImportTime" Val="1413396840"/>
           <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/new/Data_FSM.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>

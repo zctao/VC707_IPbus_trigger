@@ -76,9 +76,9 @@ module Aurora_test(
     //Access I/O Block in each aurora module
     wire Aurora_pphi_sel, Aurora_mphi_sel;
     //link reset
-    wire link_rst_sel, fsm_en_sel;
+    wire link_rst_sel, link_en_sel;
     reg  link_rst;
-    reg [1:0] fsm_en;
+    reg [1:0] link_en;
 
     //assign tvalid signal output for timing measurement with scope
     assign tx_tvalid_out = tx_tvalid_pphi;
@@ -92,7 +92,7 @@ module Aurora_test(
     assign Aurora_pphi_sel = io_sel && (io_addr[23:20] == 4'b0000);
     assign Aurora_mphi_sel = io_sel && (io_addr[23:20] == 4'b0001); 
     assign link_rst_sel = io_sel && (io_addr[23:20] == 4'b1000);  
-    assign fsm_en_sel = io_sel && (io_addr[23:20] == 4'b1001);
+    assign link_en_sel = io_sel && (io_addr[23:20] == 4'b1001);
     assign timer_p2m_sel = io_sel && (io_addr[23:20] == 4'b1010);
     assign timer_m2p_sel = io_sel && (io_addr[23:20] == 4'b1011);
     
@@ -153,7 +153,7 @@ module Aurora_test(
         .gt_refclk(gt_refclk),
         .axis_resetn(arst_n),
         //state machine enable
-        .fsm_en(fsm_en[0]),
+        .link_en(link_en[0]),
         //serial I/O pins
         .rxp(rxp_pphi), .rxn(rxn_pphi),
         .txp(txp_pphi), .txn(txn_pphi),
@@ -208,7 +208,7 @@ module Aurora_test(
         .gt_refclk(gt_refclk),
         .axis_resetn(arst_n),
         //state machine enable
-        .fsm_en(fsm_en[1]),
+        .link_en(link_en[1]),
         //serial I/O pins
         .rxp(rxp_mphi), .rxn(rxn_mphi),
         .txp(txp_mphi), .txn(txn_mphi),
@@ -264,7 +264,7 @@ module Aurora_test(
     //write reset regs
     always @ (posedge io_clk) begin
         if (io_wr_en && link_rst_sel) link_rst <= io_wr_data[0];
-        if (io_wr_en && fsm_en_sel) fsm_en <= io_wr_data[1:0];
+        if (io_wr_en && link_en_sel) link_en <= io_wr_data[1:0];
     end
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -279,7 +279,7 @@ module Aurora_test(
     reg io_rd_ack_reg;
     assign io_rd_ack = io_rd_ack_reg;
     always @(posedge io_clk) begin
-        io_rd_ack_reg <= io_rd_ack_pphi | io_rd_ack_mphi | (io_sync & link_rst_sel & io_rd_en) | (io_sync & fsm_en_sel & io_rd_en) | (io_sync & timer_p2m_sel & io_rd_en) | (io_sync & timer_m2p_sel & io_rd_en);
+        io_rd_ack_reg <= io_rd_ack_pphi | io_rd_ack_mphi | (io_sync & link_rst_sel & io_rd_en) | (io_sync & link_en_sel & io_rd_en) | (io_sync & timer_p2m_sel & io_rd_en) | (io_sync & timer_m2p_sel & io_rd_en);
         
     end
     // Route the selected memory to the 'rdbk' output.
@@ -292,7 +292,7 @@ module Aurora_test(
         if (io_rd_en & Aurora_pphi_sel) io_rd_data_reg[31:0] <= io_rd_data_pphi;
         if (io_rd_en & Aurora_mphi_sel) io_rd_data_reg[31:0] <= io_rd_data_mphi;
         if (io_rd_en & link_rst_sel) io_rd_data_reg[31:0] <= {31'b0, link_rst};    
-        if (io_rd_en & fsm_en_sel) io_rd_data_reg[31:0] <= {30'b0, fsm_en[1:0]};
+        if (io_rd_en & link_en_sel) io_rd_data_reg[31:0] <= {30'b0, link_en[1:0]};
         if (io_rd_en & timer_p2m_sel) io_rd_data_reg[31:0] <= timer_out_p2m_reg;
         if (io_rd_en & timer_m2p_sel) io_rd_data_reg[31:0] <= timer_out_m2p_reg;
     end

@@ -52,7 +52,7 @@
 
 (* X_CORE_INFO = "axis_data_fifo_v1_1_axis_data_fifo,Vivado 2014.4" *)
 (* CHECK_LICENSE_TYPE = "link_axis_data_fifo,axis_data_fifo_v1_1_axis_data_fifo,{}" *)
-(* CORE_GENERATION_INFO = "link_axis_data_fifo,axis_data_fifo_v1_1_axis_data_fifo,{x_ipProduct=Vivado 2014.4,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=axis_data_fifo,x_ipVersion=1.1,x_ipCoreRevision=5,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_FAMILY=virtex7,C_AXIS_TDATA_WIDTH=16,C_AXIS_TID_WIDTH=1,C_AXIS_TDEST_WIDTH=1,C_AXIS_TUSER_WIDTH=1,C_AXIS_SIGNAL_SET=0b00000000000000000000000000011011,C_FIFO_DEPTH=1024,C_FIFO_MODE=1,C_IS_ACLK_ASYNC=1,C_SYNCHRONIZER_STAGE=2,C_ACLKEN_CONV_MODE=0}" *)
+(* CORE_GENERATION_INFO = "link_axis_data_fifo,axis_data_fifo_v1_1_axis_data_fifo,{x_ipProduct=Vivado 2014.4,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=axis_data_fifo,x_ipVersion=1.1,x_ipCoreRevision=5,x_ipLanguage=VERILOG,x_ipSimLanguage=MIXED,C_FAMILY=virtex7,C_AXIS_TDATA_WIDTH=16,C_AXIS_TID_WIDTH=1,C_AXIS_TDEST_WIDTH=1,C_AXIS_TUSER_WIDTH=1,C_AXIS_SIGNAL_SET=0b00000000000000000000000000011011,C_FIFO_DEPTH=1024,C_FIFO_MODE=1,C_IS_ACLK_ASYNC=1,C_SYNCHRONIZER_STAGE=2,C_ACLKEN_CONV_MODE=2}" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module link_axis_data_fifo (
   s_axis_aresetn,
@@ -64,6 +64,7 @@ module link_axis_data_fifo (
   s_axis_tkeep,
   s_axis_tlast,
   m_axis_aclk,
+  m_axis_aclken,
   m_axis_tvalid,
   m_axis_tready,
   m_axis_tdata,
@@ -92,6 +93,8 @@ input wire [1 : 0] s_axis_tkeep;
 input wire s_axis_tlast;
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 M_CLKIF CLK" *)
 input wire m_axis_aclk;
+(* X_INTERFACE_INFO = "xilinx.com:signal:clockenable:1.0 M_CLKENIF CE" *)
+input wire m_axis_aclken;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TVALID" *)
 output wire m_axis_tvalid;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TREADY" *)
@@ -117,7 +120,7 @@ output wire [31 : 0] axis_rd_data_count;
     .C_FIFO_MODE(1),
     .C_IS_ACLK_ASYNC(1),
     .C_SYNCHRONIZER_STAGE(2),
-    .C_ACLKEN_CONV_MODE(0)
+    .C_ACLKEN_CONV_MODE(2)
   ) inst (
     .s_axis_aresetn(s_axis_aresetn),
     .m_axis_aresetn(m_axis_aresetn),
@@ -133,7 +136,7 @@ output wire [31 : 0] axis_rd_data_count;
     .s_axis_tdest(1'H0),
     .s_axis_tuser(1'H0),
     .m_axis_aclk(m_axis_aclk),
-    .m_axis_aclken(1'H1),
+    .m_axis_aclken(m_axis_aclken),
     .m_axis_tvalid(m_axis_tvalid),
     .m_axis_tready(m_axis_tready),
     .m_axis_tdata(m_axis_tdata),

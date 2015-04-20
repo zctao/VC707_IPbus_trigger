@@ -41,7 +41,7 @@ module Link_Interface(
         input wire axis_resetn,                     //reset from system side, in sync with clk
         input wire local_axis_resetn,               //reset from aurora side, in sync with aurora user clk
         //enable
-        input wire fsm_en,
+        input wire link_en,
         //tx ports
         output wire        local_axis_tx_tvalid,
         output wire [0:15] local_axis_tx_tdata,
@@ -55,39 +55,38 @@ module Link_Interface(
         input wire         local_axis_rx_tlast
     );
         
-    wire txdata1_sel, txdata2_sel, txdata3_sel;
-    wire rxdata1_sel, rxdata2_sel, rxdata3_sel;
-    wire rxstat1_sel, rxstat2_sel, rxstat3_sel;
+    //wire txdata1_sel, txdata2_sel, txdata3_sel;
+    wire rxdata1_sel, rxdata2_sel, rxdata3_sel, rxdata4_sel;
+    
     //address assignments
     //tx regs
-    assign txdata1_sel = io_sel && (io_addr[3:0] == 4'b0000);
-    assign txdata2_sel = io_sel && (io_addr[3:0] == 4'b0001);
-    assign txdata3_sel = io_sel && (io_addr[3:0] == 4'b0010);
+    //assign txdata1_sel = io_sel && (io_addr[3:0] == 4'b0000);
+    //assign txdata2_sel = io_sel && (io_addr[3:0] == 4'b0001);
+    //assign txdata3_sel = io_sel && (io_addr[3:0] == 4'b0010);
     //rx regs
     assign rxdata1_sel = io_sel && (io_addr[3:0] == 4'b0011);
     assign rxdata2_sel = io_sel && (io_addr[3:0] == 4'b0100);
     assign rxdata3_sel = io_sel && (io_addr[3:0] == 4'b0101);
-    assign rxstat1_sel = io_sel && (io_addr[3:0] == 4'b0110);
-    assign rxstat2_sel = io_sel && (io_addr[3:0] == 4'b0111);
-    assign rxstat3_sel = io_sel && (io_addr[3:0] == 4'b1000);   
+    assign rxdata4_sel = io_sel && (io_addr[3:0] == 4'b0110);
+    //tx & rx fifo
+    assign tx_fifo_sel = io_sel && (io_addr[3:0] == 4'b1001);
+    assign rx_fifo_sel = io_sel && (io_addr[3:0] == 4'b1010);
 
-    //TX and RX regs
-    reg [15:0] txdata1_reg;
-    reg [15:0] txdata2_reg;
-    reg [15:0] txdata3_reg;
-    reg [15:0] rxdata1_reg;
-    reg [15:0] rxdata2_reg;
-    reg [15:0] rxdata3_reg;
-    reg [15:0] rxstat1_reg;
-    reg [15:0] rxstat2_reg;
-    reg [15:0] rxstat3_reg;
+    //TX and RX regs (Not used in this version. Data are written directly from ipbus to fifo.)
+    //reg [15:0] txdata1_reg;
+    //reg [15:0] txdata2_reg;
+    //reg [15:0] txdata3_reg;
+    reg [31:0] rxdata1_reg;
+    reg [31:0] rxdata2_reg;
+    reg [31:0] rxdata3_reg;
+    reg [31:0] rxdata4_reg;
     
     //TX interface to slave side of transmit FIFO
     wire [0:15] s_axis_tx_tdata;
     wire [0:1] s_axis_tx_tkeep;
     wire s_axis_tx_tvalid;
     wire s_axis_tx_tlast;
-    wire s_axis_tx_tready;      //ready signal from tx_fifo. untied for now. Use for state machine enable?
+    wire s_axis_tx_tready;      //ready signal from tx_fifo.
     //RX interface to master side of receive FIFO
     wire [0:15] m_axis_rx_tdata;
     wire [0:1] m_axis_rx_tkeep;
@@ -97,31 +96,41 @@ module Link_Interface(
     
     assign m_axis_rx_tready = 1'b1;         //Rx FIFO is always ready to receive data whenever data comes.
     
-    wire fsm_rst;
-    assign fsm_rst = ~axis_resetn;
+//    wire fsm_rst;
+//    assign fsm_rst = ~axis_resetn;
     
-    wire local_rst;
-    assign local_rst = ~local_axis_resetn;
+//    wire local_rst;
+//    assign local_rst = ~local_axis_resetn;
     
-    Data_FSM datain_io (
-        //outputs
-        .data(s_axis_tx_tdata),
-        .valid(s_axis_tx_tvalid),
-        .keep(s_axis_tx_tkeep),
-        .last(s_axis_tx_tlast),
-        //inputs
-        .en(fsm_en),
-        .reset(fsm_rst),
-        .clk(clk),
-        .data_1(txdata1_reg),
-        .data_2(txdata2_reg),
-        .data_3(txdata3_reg)
-    );
+//    Data_FSM datain_io (
+//        //outputs
+//        .data(s_axis_tx_tdata),
+//        .valid(s_axis_tx_tvalid),
+//        .keep(s_axis_tx_tkeep),
+//        .last(s_axis_tx_tlast),
+//        //inputs
+//        .en(fsm_en),
+//        .reset(fsm_rst),
+//        .clk(clk),
+//        .data_1(txdata1_reg),
+//        .data_2(txdata2_reg),
+//        .data_3(txdata3_reg)
+//    );
     
+    //tx fifo
+    //tvalid signals used as enable
+    assign s_axis_tx_tvalid = io_wr_en && tx_fifo_sel;   //slave side write enable
+    //assign local_axis_tx_tvalid = m_axis_tx_tvalid && link_en;  //fifo would not send data to aurora until enable asserted
+    //io_wr_data[18:17] used for tkeep, [16] for tlast, [15:0] for t
+    assign s_axis_tx_tkeep = io_wr_data[18:17];
+    assign s_axis_tx_tlast = io_wr_data[16];
+    assign s_axis_tx_tdata = io_wr_data[15:0];
+
     // Connect the transmit FIFO that buffers data crossing clock domains
+    //Write to FIFO directly from ipbus
     link_axis_data_fifo tx_fifo (
       .s_axis_aresetn(axis_resetn),          // input wire axis_resetn
-      .s_axis_aclk(clk),                
+      .s_axis_aclk(io_clk),                
       .s_axis_tvalid(s_axis_tx_tvalid),          // input wire s_axis_tvalid
       .s_axis_tready(s_axis_tx_tready),          // output wire s_axis_tready
       .s_axis_tdata(s_axis_tx_tdata),            // input wire [31 : 0] s_axis_tdata
@@ -133,7 +142,8 @@ module Link_Interface(
       .m_axis_tdata(local_axis_tx_tdata),            // output wire [31 : 0] m_axis_tdata
       .m_axis_tkeep(local_axis_tx_tkeep),            // output wire [3 : 0] m_axis_tkeep
       .m_axis_tready(local_axis_tx_tready),            // input wire m_axis_tready
-      .m_axis_tlast(local_axis_tx_tlast)             // output wire m_axis_tlast
+      .m_axis_tlast(local_axis_tx_tlast),             // output wire m_axis_tlast
+      .m_axis_aclken(link_en)                       //master side clock enable
     );
     
     // Connect the receive FIFO that buffers data crossing clock domains
@@ -146,43 +156,39 @@ module Link_Interface(
       .s_axis_tkeep(local_axis_rx_tkeep),            // input wire [3 : 0] s_axis_tkeep
       .s_axis_tlast(local_axis_rx_tlast),            // input wire s_axis_tlast
       .m_axis_aresetn(axis_resetn),                 // input wire axis_aresetn
-      .m_axis_aclk(clk),                
+      .m_axis_aclk(io_clk),                
       .m_axis_tvalid(m_axis_rx_tvalid),          // output wire m_axis_tvalid
       .m_axis_tdata(m_axis_rx_tdata),            // output wire [31 : 0] m_axis_tdata
       .m_axis_tkeep(m_axis_rx_tkeep),            // output wire [3 : 0] m_axis_tkeep
       .m_axis_tready(m_axis_rx_tready),            // input wire m_axis_tready
-      .m_axis_tlast(m_axis_rx_tlast)             // output wire m_axis_tlast
+      .m_axis_tlast(m_axis_rx_tlast),             // output wire m_axis_tlast
+      .m_axis_aclken(1'b1/*io_rd_en && rx_fifo_sel*/)        //master side clock enable
     );    
     
     //readout from tx fifo
-    always @ (posedge clk) begin
+    always @ (posedge io_clk) begin
         if (!axis_resetn) begin  //axis_resetn = !link_rst
+            rxdata4_reg <= 0;
             rxdata3_reg <= 0;
             rxdata2_reg <= 0;
             rxdata1_reg <= 0;
-            rxstat3_reg <= 0;
-            rxstat2_reg <= 0;
-            rxstat1_reg <= 0;
         end else begin
             if (m_axis_rx_tvalid) begin
-                rxdata3_reg <= m_axis_rx_tdata;
+                rxdata4_reg <= {12'b0, m_axis_rx_tvalid, m_axis_rx_tkeep[0:1], m_axis_rx_tlast, m_axis_rx_tdata};
+                rxdata3_reg <= rxdata4_reg;
                 rxdata2_reg <= rxdata3_reg;
                 rxdata1_reg <= rxdata2_reg;
-            
-                rxstat3_reg <= {12'b0, m_axis_rx_tvalid, m_axis_rx_tkeep[0:1], m_axis_rx_tlast};
-                rxstat2_reg <= rxstat3_reg;
-                rxstat1_reg <= rxstat2_reg;
             end        
         end
     end
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // write to txdata_regs
-    always @ (posedge io_clk) begin
-        if (io_wr_en && txdata1_sel) txdata1_reg <= io_wr_data[15:0];
-        if (io_wr_en && txdata2_sel) txdata2_reg <= io_wr_data[15:0];
-        if (io_wr_en && txdata3_sel) txdata3_reg <= io_wr_data[15:0];
-    end    
+//    // write to txdata_regs  (Not used in this version. Data are written directly from ipbus to fifo.)
+//    always @ (posedge io_clk) begin
+//        if (io_wr_en && txdata1_sel) txdata1_reg <= io_wr_data[15:0];
+//        if (io_wr_en && txdata2_sel) txdata2_reg <= io_wr_data[15:0];
+//        if (io_wr_en && txdata3_sel) txdata3_reg <= io_wr_data[15:0];
+//    end    
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // readback mux
@@ -199,15 +205,15 @@ module Link_Interface(
     end
     // Route the selected register to the 'io_rd_data' output.
     always @(posedge io_clk) begin
-      if (txdata1_sel)  io_rd_data_reg[31:0] <= {16'b0,txdata1_reg};
-      if (txdata2_sel)  io_rd_data_reg[31:0] <= {16'b0,txdata2_reg};
-      if (txdata3_sel)  io_rd_data_reg[31:0] <= {16'b0,txdata3_reg};
-      if (rxdata1_sel)  io_rd_data_reg[31:0] <= {16'b0,rxdata1_reg};
-      if (rxdata2_sel)  io_rd_data_reg[31:0] <= {16'b0,rxdata2_reg};
-      if (rxdata3_sel)  io_rd_data_reg[31:0] <= {16'b0,rxdata3_reg};
-      if (rxstat1_sel)  io_rd_data_reg[31:0] <= {16'b0,rxstat1_reg};
-      if (rxstat2_sel)  io_rd_data_reg[31:0] <= {16'b0,rxstat2_reg};
-      if (rxstat3_sel)  io_rd_data_reg[31:0] <= {16'b0,rxstat3_reg};
+//      if (txdata1_sel)  io_rd_data_reg[31:0] <= {16'b0,txdata1_reg};
+//      if (txdata2_sel)  io_rd_data_reg[31:0] <= {16'b0,txdata2_reg};
+//      if (txdata3_sel)  io_rd_data_reg[31:0] <= {16'b0,txdata3_reg};
+      if (rxdata1_sel)  io_rd_data_reg[31:0] <= rxdata1_reg[31:0];
+      if (rxdata2_sel)  io_rd_data_reg[31:0] <= rxdata2_reg[31:0];
+      if (rxdata3_sel)  io_rd_data_reg[31:0] <= rxdata3_reg[31:0];
+      if (rxdata4_sel)  io_rd_data_reg[31:0] <= rxdata4_reg[31:0];
+      
+//      if (rx_fifo_sel && m_axis_rx_tvalid) io_rd_data_reg[31:0] <={13'b0,m_axis_rx_tkeep[0:1],m_axis_rx_tlast,m_axis_rx_tdata};
     end
     
 endmodule
