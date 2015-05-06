@@ -11,10 +11,34 @@ preplace port AXI_aclk -pg 1 -y 20 -defaultsOSRD
 preplace port gt_drp_6 -pg 1 -y 140 -defaultsOSRD
 preplace port gt_drp_7 -pg 1 -y 160 -defaultsOSRD
 preplace port reset -pg 1 -y 40 -defaultsOSRD
-preplace inst microblaze_1_axi_periph -pg 1 -lvl 1 -y 670 -defaultsOSRD
-preplace inst jtag_axi_0 -pg 1 -lvl 1 -y 320 -defaultsOSRD
+preplace inst microblaze_1_axi_periph -pg 1 -lvl 1 -y 820 -defaultsOSRD
+preplace inst jtag_axi_0 -pg 1 -lvl 1 -y 420 -defaultsOSRD
 preplace inst DRP_Bridge_hier -pg 1 -lvl 1 -y 140 -defaultsOSRD
-preplace inst mb_ps -pg 1 -lvl 1 -y 1040 -defaultsOSRD
-levelinfo -pg 1 90 260 430
+preplace inst mb_ps -pg 1 -lvl 1 -y 1220 -defaultsOSRD
+preplace netloc drp_bridge_5_drp 1 1 1 570
+preplace netloc microblaze_1_axi_periph_m00_axi 1 0 2 190 350 500
+preplace netloc drp_mux_1_gt_drp 1 1 1 490
+preplace netloc drp_bridge_4_drp 1 1 1 560
+preplace netloc drp_mux_3_gt_drp 1 1 1 530
+preplace netloc drp_mux_2_gt_drp 1 1 1 500
+preplace netloc microblaze_1_axi_periph_m08_axi 1 0 2 200 510 510
+preplace netloc axi_aclk_1 1 0 1 120
+preplace netloc microblaze_1_axi_periph_m02_axi 1 0 2 210 280 600
+preplace netloc proc_sys_reset_1_peripheral_aresetn 1 0 2 200 360 590
+preplace netloc m07_aresetn_1 1 0 2 180 1140 490
+preplace netloc microblaze_1_axi_periph_m07_axi 1 0 2 180 340 540
+preplace netloc microblaze_1_axi_periph_m03_axi 1 0 2 140 300 580
+preplace netloc microblaze_1_axi_dp 1 0 2 210 500 520
+preplace netloc drp_bridge_6_drp 1 1 1 580
+preplace netloc microblaze_1_axi_periph_m05_axi 1 0 2 160 320 560
+preplace netloc drp_mux_0_gt_drp 1 1 1 600
+preplace netloc microblaze_1_axi_periph_m01_axi 1 0 2 130 290 530
+preplace netloc microblaze_1_axi_periph_m06_axi 1 0 2 170 330 550
+preplace netloc microblaze_1_axi_periph_m04_axi 1 0 2 150 310 570
+preplace netloc jtag_axi_0_m_axi 1 0 2 190 480 490
+preplace netloc reset_1 1 0 1 110
+preplace netloc drp_bridge_7_drp 1 1 1 590
+levelinfo -pg 1 90 350 620
 ",
 }
+0

@@ -1,8 +1,8 @@
 //Copyright 1986-2014 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
-//Tool Version: Vivado v.2014.4 (win64) Build 1071353 Tue Nov 18 18:29:27 MST 2014
-//Date        : Wed Dec 10 11:32:17 2014
-//Host        : XCOLUISB33 running 64-bit Service Pack 1  (build 7601)
+//Tool Version: Vivado v.2014.4 (win64) Build 1071353 Tue Nov 18 18:24:04 MST 2014
+//Date        : Wed May 06 16:29:14 2015
+//Host        : PCPSB375 running 64-bit Service Pack 1  (build 7601)
 //Command     : generate_target eyescan_subsystem.bd
 //Design      : eyescan_subsystem
 //Purpose     : IP block netlist
@@ -10,7 +10,26 @@
 `timescale 1 ps / 1 ps
 
 module DRP_Bridge_hier_imp_17A6W6O
-   (AXI1_araddr,
+   (AXI0_araddr,
+    AXI0_arprot,
+    AXI0_arready,
+    AXI0_arvalid,
+    AXI0_awaddr,
+    AXI0_awprot,
+    AXI0_awready,
+    AXI0_awvalid,
+    AXI0_bready,
+    AXI0_bresp,
+    AXI0_bvalid,
+    AXI0_rdata,
+    AXI0_rready,
+    AXI0_rresp,
+    AXI0_rvalid,
+    AXI0_wdata,
+    AXI0_wready,
+    AXI0_wstrb,
+    AXI0_wvalid,
+    AXI1_araddr,
     AXI1_arprot,
     AXI1_arready,
     AXI1_arvalid,
@@ -144,26 +163,13 @@ module DRP_Bridge_hier_imp_17A6W6O
     AXI7_wstrb,
     AXI7_wvalid,
     AXI_aclk,
-    AXI_araddr,
     AXI_aresetn,
-    AXI_arprot,
-    AXI_arready,
-    AXI_arvalid,
-    AXI_awaddr,
-    AXI_awprot,
-    AXI_awready,
-    AXI_awvalid,
-    AXI_bready,
-    AXI_bresp,
-    AXI_bvalid,
-    AXI_rdata,
-    AXI_rready,
-    AXI_rresp,
-    AXI_rvalid,
-    AXI_wdata,
-    AXI_wready,
-    AXI_wstrb,
-    AXI_wvalid,
+    DRP0_daddr,
+    DRP0_den,
+    DRP0_di,
+    DRP0_do,
+    DRP0_drdy,
+    DRP0_dwe,
     DRP1_daddr,
     DRP1_den,
     DRP1_di,
@@ -205,13 +211,26 @@ module DRP_Bridge_hier_imp_17A6W6O
     DRP7_di,
     DRP7_do,
     DRP7_drdy,
-    DRP7_dwe,
-    DRP_daddr,
-    DRP_den,
-    DRP_di,
-    DRP_do,
-    DRP_drdy,
-    DRP_dwe);
+    DRP7_dwe);
+  input [31:0]AXI0_araddr;
+  input [2:0]AXI0_arprot;
+  output AXI0_arready;
+  input AXI0_arvalid;
+  input [31:0]AXI0_awaddr;
+  input [2:0]AXI0_awprot;
+  output AXI0_awready;
+  input AXI0_awvalid;
+  input AXI0_bready;
+  output [1:0]AXI0_bresp;
+  output AXI0_bvalid;
+  output [31:0]AXI0_rdata;
+  input AXI0_rready;
+  output [1:0]AXI0_rresp;
+  output AXI0_rvalid;
+  input [31:0]AXI0_wdata;
+  output AXI0_wready;
+  input [3:0]AXI0_wstrb;
+  input AXI0_wvalid;
   input [31:0]AXI1_araddr;
   input [2:0]AXI1_arprot;
   output AXI1_arready;
@@ -346,26 +365,13 @@ module DRP_Bridge_hier_imp_17A6W6O
   input [3:0]AXI7_wstrb;
   input AXI7_wvalid;
   input AXI_aclk;
-  input [31:0]AXI_araddr;
   input [0:0]AXI_aresetn;
-  input [2:0]AXI_arprot;
-  output AXI_arready;
-  input AXI_arvalid;
-  input [31:0]AXI_awaddr;
-  input [2:0]AXI_awprot;
-  output AXI_awready;
-  input AXI_awvalid;
-  input AXI_bready;
-  output [1:0]AXI_bresp;
-  output AXI_bvalid;
-  output [31:0]AXI_rdata;
-  input AXI_rready;
-  output [1:0]AXI_rresp;
-  output AXI_rvalid;
-  input [31:0]AXI_wdata;
-  output AXI_wready;
-  input [3:0]AXI_wstrb;
-  input AXI_wvalid;
+  output [8:0]DRP0_daddr;
+  output DRP0_den;
+  output [15:0]DRP0_di;
+  input [15:0]DRP0_do;
+  input DRP0_drdy;
+  output DRP0_dwe;
   output [8:0]DRP1_daddr;
   output DRP1_den;
   output [15:0]DRP1_di;
@@ -408,12 +414,6 @@ module DRP_Bridge_hier_imp_17A6W6O
   input [15:0]DRP7_do;
   input DRP7_drdy;
   output DRP7_dwe;
-  output [8:0]DRP_daddr;
-  output DRP_den;
-  output [15:0]DRP_di;
-  input [15:0]DRP_do;
-  input DRP_drdy;
-  output DRP_dwe;
 
   wire axi_aclk_1;
   wire [8:0]drp_bridge_4_drp_DADDR;
@@ -618,6 +618,14 @@ module DRP_Bridge_hier_imp_17A6W6O
   wire microblaze_1_axi_periph_m07_axi_WVALID;
   wire [0:0]proc_sys_reset_1_peripheral_aresetn;
 
+  assign AXI0_arready = microblaze_1_axi_periph_m01_axi_ARREADY;
+  assign AXI0_awready = microblaze_1_axi_periph_m01_axi_AWREADY;
+  assign AXI0_bresp[1:0] = microblaze_1_axi_periph_m01_axi_BRESP;
+  assign AXI0_bvalid = microblaze_1_axi_periph_m01_axi_BVALID;
+  assign AXI0_rdata[31:0] = microblaze_1_axi_periph_m01_axi_RDATA;
+  assign AXI0_rresp[1:0] = microblaze_1_axi_periph_m01_axi_RRESP;
+  assign AXI0_rvalid = microblaze_1_axi_periph_m01_axi_RVALID;
+  assign AXI0_wready = microblaze_1_axi_periph_m01_axi_WREADY;
   assign AXI1_arready = microblaze_1_axi_periph_m02_axi_ARREADY;
   assign AXI1_awready = microblaze_1_axi_periph_m02_axi_AWREADY;
   assign AXI1_bresp[1:0] = microblaze_1_axi_periph_m02_axi_BRESP;
@@ -674,14 +682,10 @@ module DRP_Bridge_hier_imp_17A6W6O
   assign AXI7_rresp[1:0] = microblaze_1_axi_periph_m00_axi_RRESP;
   assign AXI7_rvalid = microblaze_1_axi_periph_m00_axi_RVALID;
   assign AXI7_wready = microblaze_1_axi_periph_m00_axi_WREADY;
-  assign AXI_arready = microblaze_1_axi_periph_m01_axi_ARREADY;
-  assign AXI_awready = microblaze_1_axi_periph_m01_axi_AWREADY;
-  assign AXI_bresp[1:0] = microblaze_1_axi_periph_m01_axi_BRESP;
-  assign AXI_bvalid = microblaze_1_axi_periph_m01_axi_BVALID;
-  assign AXI_rdata[31:0] = microblaze_1_axi_periph_m01_axi_RDATA;
-  assign AXI_rresp[1:0] = microblaze_1_axi_periph_m01_axi_RRESP;
-  assign AXI_rvalid = microblaze_1_axi_periph_m01_axi_RVALID;
-  assign AXI_wready = microblaze_1_axi_periph_m01_axi_WREADY;
+  assign DRP0_daddr[8:0] = drp_mux_1_gt_drp_DADDR;
+  assign DRP0_den = drp_mux_1_gt_drp_DEN;
+  assign DRP0_di[15:0] = drp_mux_1_gt_drp_DI;
+  assign DRP0_dwe = drp_mux_1_gt_drp_DWE;
   assign DRP1_daddr[8:0] = drp_mux_2_gt_drp_DADDR;
   assign DRP1_den = drp_mux_2_gt_drp_DEN;
   assign DRP1_di[15:0] = drp_mux_2_gt_drp_DI;
@@ -710,10 +714,6 @@ module DRP_Bridge_hier_imp_17A6W6O
   assign DRP7_den = drp_mux_0_gt_drp_DEN;
   assign DRP7_di[15:0] = drp_mux_0_gt_drp_DI;
   assign DRP7_dwe = drp_mux_0_gt_drp_DWE;
-  assign DRP_daddr[8:0] = drp_mux_1_gt_drp_DADDR;
-  assign DRP_den = drp_mux_1_gt_drp_DEN;
-  assign DRP_di[15:0] = drp_mux_1_gt_drp_DI;
-  assign DRP_dwe = drp_mux_1_gt_drp_DWE;
   assign axi_aclk_1 = AXI_aclk;
   assign drp_bridge_4_drp_DO = DRP3_do[15:0];
   assign drp_bridge_4_drp_DRDY = DRP3_drdy;
@@ -725,8 +725,8 @@ module DRP_Bridge_hier_imp_17A6W6O
   assign drp_bridge_7_drp_DRDY = DRP6_drdy;
   assign drp_mux_0_gt_drp_DO = DRP7_do[15:0];
   assign drp_mux_0_gt_drp_DRDY = DRP7_drdy;
-  assign drp_mux_1_gt_drp_DO = DRP_do[15:0];
-  assign drp_mux_1_gt_drp_DRDY = DRP_drdy;
+  assign drp_mux_1_gt_drp_DO = DRP0_do[15:0];
+  assign drp_mux_1_gt_drp_DRDY = DRP0_drdy;
   assign drp_mux_2_gt_drp_DO = DRP1_do[15:0];
   assign drp_mux_2_gt_drp_DRDY = DRP1_drdy;
   assign drp_mux_3_gt_drp_DO = DRP2_do[15:0];
@@ -742,17 +742,17 @@ module DRP_Bridge_hier_imp_17A6W6O
   assign microblaze_1_axi_periph_m00_axi_WDATA = AXI7_wdata[31:0];
   assign microblaze_1_axi_periph_m00_axi_WSTRB = AXI7_wstrb[3:0];
   assign microblaze_1_axi_periph_m00_axi_WVALID = AXI7_wvalid;
-  assign microblaze_1_axi_periph_m01_axi_ARADDR = AXI_araddr[31:0];
-  assign microblaze_1_axi_periph_m01_axi_ARPROT = AXI_arprot[2:0];
-  assign microblaze_1_axi_periph_m01_axi_ARVALID = AXI_arvalid;
-  assign microblaze_1_axi_periph_m01_axi_AWADDR = AXI_awaddr[31:0];
-  assign microblaze_1_axi_periph_m01_axi_AWPROT = AXI_awprot[2:0];
-  assign microblaze_1_axi_periph_m01_axi_AWVALID = AXI_awvalid;
-  assign microblaze_1_axi_periph_m01_axi_BREADY = AXI_bready;
-  assign microblaze_1_axi_periph_m01_axi_RREADY = AXI_rready;
-  assign microblaze_1_axi_periph_m01_axi_WDATA = AXI_wdata[31:0];
-  assign microblaze_1_axi_periph_m01_axi_WSTRB = AXI_wstrb[3:0];
-  assign microblaze_1_axi_periph_m01_axi_WVALID = AXI_wvalid;
+  assign microblaze_1_axi_periph_m01_axi_ARADDR = AXI0_araddr[31:0];
+  assign microblaze_1_axi_periph_m01_axi_ARPROT = AXI0_arprot[2:0];
+  assign microblaze_1_axi_periph_m01_axi_ARVALID = AXI0_arvalid;
+  assign microblaze_1_axi_periph_m01_axi_AWADDR = AXI0_awaddr[31:0];
+  assign microblaze_1_axi_periph_m01_axi_AWPROT = AXI0_awprot[2:0];
+  assign microblaze_1_axi_periph_m01_axi_AWVALID = AXI0_awvalid;
+  assign microblaze_1_axi_periph_m01_axi_BREADY = AXI0_bready;
+  assign microblaze_1_axi_periph_m01_axi_RREADY = AXI0_rready;
+  assign microblaze_1_axi_periph_m01_axi_WDATA = AXI0_wdata[31:0];
+  assign microblaze_1_axi_periph_m01_axi_WSTRB = AXI0_wstrb[3:0];
+  assign microblaze_1_axi_periph_m01_axi_WVALID = AXI0_wvalid;
   assign microblaze_1_axi_periph_m02_axi_ARADDR = AXI1_araddr[31:0];
   assign microblaze_1_axi_periph_m02_axi_ARPROT = AXI1_arprot[2:0];
   assign microblaze_1_axi_periph_m02_axi_ARVALID = AXI1_arvalid;
@@ -822,34 +822,6 @@ module DRP_Bridge_hier_imp_17A6W6O
   assign proc_sys_reset_1_peripheral_aresetn = AXI_aresetn[0];
 eyescan_subsystem_drp_bridge_0_0 drp_bridge_0
        (.AXI_aclk(axi_aclk_1),
-        .AXI_araddr(microblaze_1_axi_periph_m00_axi_ARADDR),
-        .AXI_aresetn(proc_sys_reset_1_peripheral_aresetn),
-        .AXI_arprot(microblaze_1_axi_periph_m00_axi_ARPROT),
-        .AXI_arready(microblaze_1_axi_periph_m00_axi_ARREADY),
-        .AXI_arvalid(microblaze_1_axi_periph_m00_axi_ARVALID),
-        .AXI_awaddr(microblaze_1_axi_periph_m00_axi_AWADDR),
-        .AXI_awprot(microblaze_1_axi_periph_m00_axi_AWPROT),
-        .AXI_awready(microblaze_1_axi_periph_m00_axi_AWREADY),
-        .AXI_awvalid(microblaze_1_axi_periph_m00_axi_AWVALID),
-        .AXI_bready(microblaze_1_axi_periph_m00_axi_BREADY),
-        .AXI_bresp(microblaze_1_axi_periph_m00_axi_BRESP),
-        .AXI_bvalid(microblaze_1_axi_periph_m00_axi_BVALID),
-        .AXI_rdata(microblaze_1_axi_periph_m00_axi_RDATA),
-        .AXI_rready(microblaze_1_axi_periph_m00_axi_RREADY),
-        .AXI_rresp(microblaze_1_axi_periph_m00_axi_RRESP),
-        .AXI_rvalid(microblaze_1_axi_periph_m00_axi_RVALID),
-        .AXI_wdata(microblaze_1_axi_periph_m00_axi_WDATA),
-        .AXI_wready(microblaze_1_axi_periph_m00_axi_WREADY),
-        .AXI_wstrb(microblaze_1_axi_periph_m00_axi_WSTRB),
-        .AXI_wvalid(microblaze_1_axi_periph_m00_axi_WVALID),
-        .drp_addr(drp_mux_0_gt_drp_DADDR),
-        .drp_di(drp_mux_0_gt_drp_DI),
-        .drp_do(drp_mux_0_gt_drp_DO),
-        .drp_en(drp_mux_0_gt_drp_DEN),
-        .drp_rdy(drp_mux_0_gt_drp_DRDY),
-        .drp_we(drp_mux_0_gt_drp_DWE));
-eyescan_subsystem_drp_bridge_1_0 drp_bridge_1
-       (.AXI_aclk(axi_aclk_1),
         .AXI_araddr(microblaze_1_axi_periph_m01_axi_ARADDR),
         .AXI_aresetn(proc_sys_reset_1_peripheral_aresetn),
         .AXI_arprot(microblaze_1_axi_periph_m01_axi_ARPROT),
@@ -876,7 +848,7 @@ eyescan_subsystem_drp_bridge_1_0 drp_bridge_1
         .drp_en(drp_mux_1_gt_drp_DEN),
         .drp_rdy(drp_mux_1_gt_drp_DRDY),
         .drp_we(drp_mux_1_gt_drp_DWE));
-eyescan_subsystem_drp_bridge_2_0 drp_bridge_2
+eyescan_subsystem_drp_bridge_1_0 drp_bridge_1
        (.AXI_aclk(axi_aclk_1),
         .AXI_araddr(microblaze_1_axi_periph_m02_axi_ARADDR),
         .AXI_aresetn(proc_sys_reset_1_peripheral_aresetn),
@@ -904,7 +876,7 @@ eyescan_subsystem_drp_bridge_2_0 drp_bridge_2
         .drp_en(drp_mux_2_gt_drp_DEN),
         .drp_rdy(drp_mux_2_gt_drp_DRDY),
         .drp_we(drp_mux_2_gt_drp_DWE));
-eyescan_subsystem_drp_bridge_3_0 drp_bridge_3
+eyescan_subsystem_drp_bridge_2_0 drp_bridge_2
        (.AXI_aclk(axi_aclk_1),
         .AXI_araddr(microblaze_1_axi_periph_m03_axi_ARADDR),
         .AXI_aresetn(proc_sys_reset_1_peripheral_aresetn),
@@ -932,7 +904,7 @@ eyescan_subsystem_drp_bridge_3_0 drp_bridge_3
         .drp_en(drp_mux_3_gt_drp_DEN),
         .drp_rdy(drp_mux_3_gt_drp_DRDY),
         .drp_we(drp_mux_3_gt_drp_DWE));
-eyescan_subsystem_drp_bridge_4_0 drp_bridge_4
+eyescan_subsystem_drp_bridge_3_0 drp_bridge_3
        (.AXI_aclk(axi_aclk_1),
         .AXI_araddr(microblaze_1_axi_periph_m04_axi_ARADDR),
         .AXI_aresetn(proc_sys_reset_1_peripheral_aresetn),
@@ -960,7 +932,7 @@ eyescan_subsystem_drp_bridge_4_0 drp_bridge_4
         .drp_en(drp_bridge_4_drp_DEN),
         .drp_rdy(drp_bridge_4_drp_DRDY),
         .drp_we(drp_bridge_4_drp_DWE));
-eyescan_subsystem_drp_bridge_5_0 drp_bridge_5
+eyescan_subsystem_drp_bridge_4_0 drp_bridge_4
        (.AXI_aclk(axi_aclk_1),
         .AXI_araddr(microblaze_1_axi_periph_m05_axi_ARADDR),
         .AXI_aresetn(proc_sys_reset_1_peripheral_aresetn),
@@ -988,7 +960,7 @@ eyescan_subsystem_drp_bridge_5_0 drp_bridge_5
         .drp_en(drp_bridge_5_drp_DEN),
         .drp_rdy(drp_bridge_5_drp_DRDY),
         .drp_we(drp_bridge_5_drp_DWE));
-eyescan_subsystem_drp_bridge_6_0 drp_bridge_6
+eyescan_subsystem_drp_bridge_5_0 drp_bridge_5
        (.AXI_aclk(axi_aclk_1),
         .AXI_araddr(microblaze_1_axi_periph_m06_axi_ARADDR),
         .AXI_aresetn(proc_sys_reset_1_peripheral_aresetn),
@@ -1016,7 +988,7 @@ eyescan_subsystem_drp_bridge_6_0 drp_bridge_6
         .drp_en(drp_bridge_6_drp_DEN),
         .drp_rdy(drp_bridge_6_drp_DRDY),
         .drp_we(drp_bridge_6_drp_DWE));
-eyescan_subsystem_drp_bridge_7_0 drp_bridge_7
+eyescan_subsystem_drp_bridge_6_0 drp_bridge_6
        (.AXI_aclk(axi_aclk_1),
         .AXI_araddr(microblaze_1_axi_periph_m07_axi_ARADDR),
         .AXI_aresetn(proc_sys_reset_1_peripheral_aresetn),
@@ -1044,6 +1016,34 @@ eyescan_subsystem_drp_bridge_7_0 drp_bridge_7
         .drp_en(drp_bridge_7_drp_DEN),
         .drp_rdy(drp_bridge_7_drp_DRDY),
         .drp_we(drp_bridge_7_drp_DWE));
+eyescan_subsystem_drp_bridge_7_0 drp_bridge_7
+       (.AXI_aclk(axi_aclk_1),
+        .AXI_araddr(microblaze_1_axi_periph_m00_axi_ARADDR),
+        .AXI_aresetn(proc_sys_reset_1_peripheral_aresetn),
+        .AXI_arprot(microblaze_1_axi_periph_m00_axi_ARPROT),
+        .AXI_arready(microblaze_1_axi_periph_m00_axi_ARREADY),
+        .AXI_arvalid(microblaze_1_axi_periph_m00_axi_ARVALID),
+        .AXI_awaddr(microblaze_1_axi_periph_m00_axi_AWADDR),
+        .AXI_awprot(microblaze_1_axi_periph_m00_axi_AWPROT),
+        .AXI_awready(microblaze_1_axi_periph_m00_axi_AWREADY),
+        .AXI_awvalid(microblaze_1_axi_periph_m00_axi_AWVALID),
+        .AXI_bready(microblaze_1_axi_periph_m00_axi_BREADY),
+        .AXI_bresp(microblaze_1_axi_periph_m00_axi_BRESP),
+        .AXI_bvalid(microblaze_1_axi_periph_m00_axi_BVALID),
+        .AXI_rdata(microblaze_1_axi_periph_m00_axi_RDATA),
+        .AXI_rready(microblaze_1_axi_periph_m00_axi_RREADY),
+        .AXI_rresp(microblaze_1_axi_periph_m00_axi_RRESP),
+        .AXI_rvalid(microblaze_1_axi_periph_m00_axi_RVALID),
+        .AXI_wdata(microblaze_1_axi_periph_m00_axi_WDATA),
+        .AXI_wready(microblaze_1_axi_periph_m00_axi_WREADY),
+        .AXI_wstrb(microblaze_1_axi_periph_m00_axi_WSTRB),
+        .AXI_wvalid(microblaze_1_axi_periph_m00_axi_WVALID),
+        .drp_addr(drp_mux_0_gt_drp_DADDR),
+        .drp_di(drp_mux_0_gt_drp_DI),
+        .drp_do(drp_mux_0_gt_drp_DO),
+        .drp_en(drp_mux_0_gt_drp_DEN),
+        .drp_rdy(drp_mux_0_gt_drp_DRDY),
+        .drp_we(drp_mux_0_gt_drp_DWE));
 endmodule
 
 module eyescan_subsystem
@@ -1441,57 +1441,76 @@ module eyescan_subsystem
   wire reset_1;
 
   assign axi_aclk_1 = AXI_aclk;
-  assign drp_bridge_4_drp_DO = gt_drp_4_do[15:0];
-  assign drp_bridge_4_drp_DRDY = gt_drp_4_drdy;
-  assign drp_bridge_5_drp_DO = gt_drp_5_do[15:0];
-  assign drp_bridge_5_drp_DRDY = gt_drp_5_drdy;
-  assign drp_bridge_6_drp_DO = gt_drp_6_do[15:0];
-  assign drp_bridge_6_drp_DRDY = gt_drp_6_drdy;
-  assign drp_bridge_7_drp_DO = gt_drp_7_do[15:0];
-  assign drp_bridge_7_drp_DRDY = gt_drp_7_drdy;
-  assign drp_mux_0_gt_drp_DO = gt_drp_0_do[15:0];
-  assign drp_mux_0_gt_drp_DRDY = gt_drp_0_drdy;
-  assign drp_mux_1_gt_drp_DO = gt_drp_1_do[15:0];
-  assign drp_mux_1_gt_drp_DRDY = gt_drp_1_drdy;
-  assign drp_mux_2_gt_drp_DO = gt_drp_2_do[15:0];
-  assign drp_mux_2_gt_drp_DRDY = gt_drp_2_drdy;
-  assign drp_mux_3_gt_drp_DO = gt_drp_3_do[15:0];
-  assign drp_mux_3_gt_drp_DRDY = gt_drp_3_drdy;
-  assign gt_drp_0_daddr[8:0] = drp_mux_0_gt_drp_DADDR;
-  assign gt_drp_0_den = drp_mux_0_gt_drp_DEN;
-  assign gt_drp_0_di[15:0] = drp_mux_0_gt_drp_DI;
-  assign gt_drp_0_dwe = drp_mux_0_gt_drp_DWE;
-  assign gt_drp_1_daddr[8:0] = drp_mux_1_gt_drp_DADDR;
-  assign gt_drp_1_den = drp_mux_1_gt_drp_DEN;
-  assign gt_drp_1_di[15:0] = drp_mux_1_gt_drp_DI;
-  assign gt_drp_1_dwe = drp_mux_1_gt_drp_DWE;
-  assign gt_drp_2_daddr[8:0] = drp_mux_2_gt_drp_DADDR;
-  assign gt_drp_2_den = drp_mux_2_gt_drp_DEN;
-  assign gt_drp_2_di[15:0] = drp_mux_2_gt_drp_DI;
-  assign gt_drp_2_dwe = drp_mux_2_gt_drp_DWE;
-  assign gt_drp_3_daddr[8:0] = drp_mux_3_gt_drp_DADDR;
-  assign gt_drp_3_den = drp_mux_3_gt_drp_DEN;
-  assign gt_drp_3_di[15:0] = drp_mux_3_gt_drp_DI;
-  assign gt_drp_3_dwe = drp_mux_3_gt_drp_DWE;
-  assign gt_drp_4_daddr[8:0] = drp_bridge_4_drp_DADDR;
-  assign gt_drp_4_den = drp_bridge_4_drp_DEN;
-  assign gt_drp_4_di[15:0] = drp_bridge_4_drp_DI;
-  assign gt_drp_4_dwe = drp_bridge_4_drp_DWE;
-  assign gt_drp_5_daddr[8:0] = drp_bridge_5_drp_DADDR;
-  assign gt_drp_5_den = drp_bridge_5_drp_DEN;
-  assign gt_drp_5_di[15:0] = drp_bridge_5_drp_DI;
-  assign gt_drp_5_dwe = drp_bridge_5_drp_DWE;
-  assign gt_drp_6_daddr[8:0] = drp_bridge_6_drp_DADDR;
-  assign gt_drp_6_den = drp_bridge_6_drp_DEN;
-  assign gt_drp_6_di[15:0] = drp_bridge_6_drp_DI;
-  assign gt_drp_6_dwe = drp_bridge_6_drp_DWE;
-  assign gt_drp_7_daddr[8:0] = drp_bridge_7_drp_DADDR;
-  assign gt_drp_7_den = drp_bridge_7_drp_DEN;
-  assign gt_drp_7_di[15:0] = drp_bridge_7_drp_DI;
-  assign gt_drp_7_dwe = drp_bridge_7_drp_DWE;
+  assign drp_bridge_4_drp_DO = gt_drp_3_do[15:0];
+  assign drp_bridge_4_drp_DRDY = gt_drp_3_drdy;
+  assign drp_bridge_5_drp_DO = gt_drp_4_do[15:0];
+  assign drp_bridge_5_drp_DRDY = gt_drp_4_drdy;
+  assign drp_bridge_6_drp_DO = gt_drp_5_do[15:0];
+  assign drp_bridge_6_drp_DRDY = gt_drp_5_drdy;
+  assign drp_bridge_7_drp_DO = gt_drp_6_do[15:0];
+  assign drp_bridge_7_drp_DRDY = gt_drp_6_drdy;
+  assign drp_mux_0_gt_drp_DO = gt_drp_7_do[15:0];
+  assign drp_mux_0_gt_drp_DRDY = gt_drp_7_drdy;
+  assign drp_mux_1_gt_drp_DO = gt_drp_0_do[15:0];
+  assign drp_mux_1_gt_drp_DRDY = gt_drp_0_drdy;
+  assign drp_mux_2_gt_drp_DO = gt_drp_1_do[15:0];
+  assign drp_mux_2_gt_drp_DRDY = gt_drp_1_drdy;
+  assign drp_mux_3_gt_drp_DO = gt_drp_2_do[15:0];
+  assign drp_mux_3_gt_drp_DRDY = gt_drp_2_drdy;
+  assign gt_drp_0_daddr[8:0] = drp_mux_1_gt_drp_DADDR;
+  assign gt_drp_0_den = drp_mux_1_gt_drp_DEN;
+  assign gt_drp_0_di[15:0] = drp_mux_1_gt_drp_DI;
+  assign gt_drp_0_dwe = drp_mux_1_gt_drp_DWE;
+  assign gt_drp_1_daddr[8:0] = drp_mux_2_gt_drp_DADDR;
+  assign gt_drp_1_den = drp_mux_2_gt_drp_DEN;
+  assign gt_drp_1_di[15:0] = drp_mux_2_gt_drp_DI;
+  assign gt_drp_1_dwe = drp_mux_2_gt_drp_DWE;
+  assign gt_drp_2_daddr[8:0] = drp_mux_3_gt_drp_DADDR;
+  assign gt_drp_2_den = drp_mux_3_gt_drp_DEN;
+  assign gt_drp_2_di[15:0] = drp_mux_3_gt_drp_DI;
+  assign gt_drp_2_dwe = drp_mux_3_gt_drp_DWE;
+  assign gt_drp_3_daddr[8:0] = drp_bridge_4_drp_DADDR;
+  assign gt_drp_3_den = drp_bridge_4_drp_DEN;
+  assign gt_drp_3_di[15:0] = drp_bridge_4_drp_DI;
+  assign gt_drp_3_dwe = drp_bridge_4_drp_DWE;
+  assign gt_drp_4_daddr[8:0] = drp_bridge_5_drp_DADDR;
+  assign gt_drp_4_den = drp_bridge_5_drp_DEN;
+  assign gt_drp_4_di[15:0] = drp_bridge_5_drp_DI;
+  assign gt_drp_4_dwe = drp_bridge_5_drp_DWE;
+  assign gt_drp_5_daddr[8:0] = drp_bridge_6_drp_DADDR;
+  assign gt_drp_5_den = drp_bridge_6_drp_DEN;
+  assign gt_drp_5_di[15:0] = drp_bridge_6_drp_DI;
+  assign gt_drp_5_dwe = drp_bridge_6_drp_DWE;
+  assign gt_drp_6_daddr[8:0] = drp_bridge_7_drp_DADDR;
+  assign gt_drp_6_den = drp_bridge_7_drp_DEN;
+  assign gt_drp_6_di[15:0] = drp_bridge_7_drp_DI;
+  assign gt_drp_6_dwe = drp_bridge_7_drp_DWE;
+  assign gt_drp_7_daddr[8:0] = drp_mux_0_gt_drp_DADDR;
+  assign gt_drp_7_den = drp_mux_0_gt_drp_DEN;
+  assign gt_drp_7_di[15:0] = drp_mux_0_gt_drp_DI;
+  assign gt_drp_7_dwe = drp_mux_0_gt_drp_DWE;
   assign reset_1 = reset;
 DRP_Bridge_hier_imp_17A6W6O DRP_Bridge_hier
-       (.AXI1_araddr(microblaze_1_axi_periph_m02_axi_ARADDR),
+       (.AXI0_araddr(microblaze_1_axi_periph_m01_axi_ARADDR),
+        .AXI0_arprot(microblaze_1_axi_periph_m01_axi_ARPROT),
+        .AXI0_arready(microblaze_1_axi_periph_m01_axi_ARREADY),
+        .AXI0_arvalid(microblaze_1_axi_periph_m01_axi_ARVALID),
+        .AXI0_awaddr(microblaze_1_axi_periph_m01_axi_AWADDR),
+        .AXI0_awprot(microblaze_1_axi_periph_m01_axi_AWPROT),
+        .AXI0_awready(microblaze_1_axi_periph_m01_axi_AWREADY),
+        .AXI0_awvalid(microblaze_1_axi_periph_m01_axi_AWVALID),
+        .AXI0_bready(microblaze_1_axi_periph_m01_axi_BREADY),
+        .AXI0_bresp(microblaze_1_axi_periph_m01_axi_BRESP),
+        .AXI0_bvalid(microblaze_1_axi_periph_m01_axi_BVALID),
+        .AXI0_rdata(microblaze_1_axi_periph_m01_axi_RDATA),
+        .AXI0_rready(microblaze_1_axi_periph_m01_axi_RREADY),
+        .AXI0_rresp(microblaze_1_axi_periph_m01_axi_RRESP),
+        .AXI0_rvalid(microblaze_1_axi_periph_m01_axi_RVALID),
+        .AXI0_wdata(microblaze_1_axi_periph_m01_axi_WDATA),
+        .AXI0_wready(microblaze_1_axi_periph_m01_axi_WREADY),
+        .AXI0_wstrb(microblaze_1_axi_periph_m01_axi_WSTRB),
+        .AXI0_wvalid(microblaze_1_axi_periph_m01_axi_WVALID),
+        .AXI1_araddr(microblaze_1_axi_periph_m02_axi_ARADDR),
         .AXI1_arprot(microblaze_1_axi_periph_m02_axi_ARPROT),
         .AXI1_arready(microblaze_1_axi_periph_m02_axi_ARREADY),
         .AXI1_arvalid(microblaze_1_axi_periph_m02_axi_ARVALID),
@@ -1625,26 +1644,13 @@ DRP_Bridge_hier_imp_17A6W6O DRP_Bridge_hier
         .AXI7_wstrb(microblaze_1_axi_periph_m00_axi_WSTRB),
         .AXI7_wvalid(microblaze_1_axi_periph_m00_axi_WVALID),
         .AXI_aclk(axi_aclk_1),
-        .AXI_araddr(microblaze_1_axi_periph_m01_axi_ARADDR),
         .AXI_aresetn(proc_sys_reset_1_peripheral_aresetn),
-        .AXI_arprot(microblaze_1_axi_periph_m01_axi_ARPROT),
-        .AXI_arready(microblaze_1_axi_periph_m01_axi_ARREADY),
-        .AXI_arvalid(microblaze_1_axi_periph_m01_axi_ARVALID),
-        .AXI_awaddr(microblaze_1_axi_periph_m01_axi_AWADDR),
-        .AXI_awprot(microblaze_1_axi_periph_m01_axi_AWPROT),
-        .AXI_awready(microblaze_1_axi_periph_m01_axi_AWREADY),
-        .AXI_awvalid(microblaze_1_axi_periph_m01_axi_AWVALID),
-        .AXI_bready(microblaze_1_axi_periph_m01_axi_BREADY),
-        .AXI_bresp(microblaze_1_axi_periph_m01_axi_BRESP),
-        .AXI_bvalid(microblaze_1_axi_periph_m01_axi_BVALID),
-        .AXI_rdata(microblaze_1_axi_periph_m01_axi_RDATA),
-        .AXI_rready(microblaze_1_axi_periph_m01_axi_RREADY),
-        .AXI_rresp(microblaze_1_axi_periph_m01_axi_RRESP),
-        .AXI_rvalid(microblaze_1_axi_periph_m01_axi_RVALID),
-        .AXI_wdata(microblaze_1_axi_periph_m01_axi_WDATA),
-        .AXI_wready(microblaze_1_axi_periph_m01_axi_WREADY),
-        .AXI_wstrb(microblaze_1_axi_periph_m01_axi_WSTRB),
-        .AXI_wvalid(microblaze_1_axi_periph_m01_axi_WVALID),
+        .DRP0_daddr(drp_mux_1_gt_drp_DADDR),
+        .DRP0_den(drp_mux_1_gt_drp_DEN),
+        .DRP0_di(drp_mux_1_gt_drp_DI),
+        .DRP0_do(drp_mux_1_gt_drp_DO),
+        .DRP0_drdy(drp_mux_1_gt_drp_DRDY),
+        .DRP0_dwe(drp_mux_1_gt_drp_DWE),
         .DRP1_daddr(drp_mux_2_gt_drp_DADDR),
         .DRP1_den(drp_mux_2_gt_drp_DEN),
         .DRP1_di(drp_mux_2_gt_drp_DI),
@@ -1686,13 +1692,7 @@ DRP_Bridge_hier_imp_17A6W6O DRP_Bridge_hier
         .DRP7_di(drp_mux_0_gt_drp_DI),
         .DRP7_do(drp_mux_0_gt_drp_DO),
         .DRP7_drdy(drp_mux_0_gt_drp_DRDY),
-        .DRP7_dwe(drp_mux_0_gt_drp_DWE),
-        .DRP_daddr(drp_mux_1_gt_drp_DADDR),
-        .DRP_den(drp_mux_1_gt_drp_DEN),
-        .DRP_di(drp_mux_1_gt_drp_DI),
-        .DRP_do(drp_mux_1_gt_drp_DO),
-        .DRP_drdy(drp_mux_1_gt_drp_DRDY),
-        .DRP_dwe(drp_mux_1_gt_drp_DWE));
+        .DRP7_dwe(drp_mux_0_gt_drp_DWE));
 eyescan_subsystem_jtag_axi_0_0 jtag_axi_0
        (.aclk(axi_aclk_1),
         .aresetn(m07_aresetn_1),

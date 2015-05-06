@@ -1,4 +1,4 @@
-// (c) Copyright 1995-2014 Xilinx, Inc. All rights reserved.
+// (c) Copyright 1995-2015 Xilinx, Inc. All rights reserved.
 // 
 // This file contains confidential and proprietary information
 // of Xilinx, Inc. and is protected under U.S. and
@@ -141,7 +141,7 @@ input wire drp_rdy;
   drp_bridge #(
     .DRP_ADDR_WIDTH(9),
     .DRP_DATA_WIDTH(16),
-    .C_S_AXI_ADDR_WIDTH(24),
+    .C_S_AXI_ADDR_WIDTH(20),
     .C_S_AXI_DATA_WIDTH(32)
   ) inst (
     .AXI_aclk(AXI_aclk),

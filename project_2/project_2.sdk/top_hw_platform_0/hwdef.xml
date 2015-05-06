@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<Project Version="1" Minor="0">
+	<BUILD_NUMBER Name="1071353"/>
+	<FULL_BUILD Name="SW Build 1071353 on Tue Nov 18 18:24:04 MST 2014"/>
+	<MODE Name="Pre-Synthesis"/>
+	<SYSTEMINFO BOARD="xilinx.com:vc707:part0:1.0" ARCH="virtex7" PACKAGE="ffg1761" DEVICE="7vx485t" SPEED="-2" LUT="" FF="" BRAM="" DSP=""/>
+	<HIERARCHY Name="slaves/slave6/trigger_top/baseline/aurora_test_top/LinkProjPhiMinus/eyescan_subsystem_i"/>
+	<File Type="HW_HANDOFF" Name="eyescan_subsystem.hwh" ModTime="1430944153"/>
+	<File Type="BD_TCL" Name="eyescan_subsystem_bd.tcl" ModTime="1430944153"/>
+</Project>
+

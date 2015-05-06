@@ -78,18 +78,45 @@ module Aurora_Channel_1(
     wire [1:0] local_axis_tx_tkeep, local_axis_rx_tkeep;
     wire local_axis_tx_tvalid, local_axis_rx_tvalid;
     wire local_axis_tx_tready;
-    
-    wire drdy_out_unused;
-    wire [15:0] drpdo_out_unused;
 
     // tie off unused signals, use 'init_clk' for DRP clock
     wire [8:0] drpaddr_in;
     wire drpen_in, drpwe_in;
     wire [15:0] drpdi_in;
-    assign drpaddr_in = 9'h0;
-    assign drpen_in = 1'b0;
-    assign drpdi_in = 16'h0;
-    assign drpwe_in = 1'b0;
+    wire [15:0] drpdo_out;
+    wire drprdy_out;
+
+    wire [8:0] gt_drp_0_daddr;
+    wire gt_drp_0_den, gt_drp_0_dwe;
+    wire [15:0] gt_drp_0_di;
+    wire [15:0] gt_drp_0_do;
+    wire gt_drp_0_drdy;
+    
+    assign drpaddr_in = gt_drp_0_daddr;
+    assign drpen_in = gt_drp_0_den;
+    assign drpwe_in = gt_drp_0_dwe;
+    assign drpdi_in = gt_drp_0_di;
+    assign gt_drp_0_do = drpdo_out;
+    assign gt_drp_0_drdy = drprdy_out;
+
+    //eyescan subsystem
+    eyescan_subsystem eyescan_subsystem_i
+    (
+          .AXI_aclk(init_clk),
+           
+           //Lane 0
+          .gt_drp_0_daddr(gt_drp_0_daddr),
+          .gt_drp_0_den(gt_drp_0_den),
+          .gt_drp_0_di(gt_drp_0_di),
+          .gt_drp_0_do(gt_drp_0_do),
+          .gt_drp_0_drdy(gt_drp_0_drdy),
+          .gt_drp_0_dwe(gt_drp_0_dwe),
+            
+          .reset(gt_reset_in)
+    );
+
+
+    
     wire power_down;
     assign power_down = 1'b0;
 
@@ -183,14 +210,14 @@ module Aurora_Channel_1(
         .tx_resetdone_out(tx_resetdone_out),        // output, to IPbus I/O
         .rx_resetdone_out(rx_resetdone_out),        // output, to IPbus I/O
         .link_reset_out(link_reset_out),            // output, to IPbus I/O
-        // drp interface is not used
-        .drpclk_in(init_clk),                   // input, unused, but we drive the clock
-        .drpaddr_in(drpaddr_in),                // input [8:0], tied off
-        .drpen_in(drpen_in),                    // input, tied off
-        .drpdi_in(drpdi_in),                    // input [15:0], tied off
-        .drpwe_in(drpwe_in),                    // input, tied off
-        .drprdy_out(drprdy_out_unused),         // output [15:0], unused
-        .drpdo_out(drpdo_out_unused),           // output, unused
+        // drp interface is connected to eyescan subsystem 
+        .drpclk_in(init_clk),                   // input
+        .drpaddr_in(drpaddr_in),                // input [8:0]
+        .drpen_in(drpen_in),                    // input
+        .drpdi_in(drpdi_in),                    // input [15:0]
+        .drpwe_in(drpwe_in),                    // input
+        .drprdy_out(drprdy_out),                // output 
+        .drpdo_out(drpdo_out),                  // output [15:0]
         // QPLL Ports
         .gt0_qplllock_in(gt0_qplllock),               // input
         .gt0_qpllrefclklost_in(gt0_qpllrefclklost),   // input

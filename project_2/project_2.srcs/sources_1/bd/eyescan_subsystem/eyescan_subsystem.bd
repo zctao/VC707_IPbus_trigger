@@ -122,15 +122,15 @@
         <spirit:componentRef spirit:library="BlockDiagram/eyescan_subsystem_imp" spirit:name="DRP_Bridge_hier" spirit:vendor="xilinx.com" spirit:version="1.00.a"/>
       </spirit:componentInstance>
       <spirit:componentInstance>
+        <spirit:instanceName>mb_ps</spirit:instanceName>
+        <spirit:componentRef spirit:library="BlockDiagram/eyescan_subsystem_imp" spirit:name="mb_ps" spirit:vendor="xilinx.com" spirit:version="1.00.a"/>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
         <spirit:instanceName>jtag_axi_0</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="jtag_axi" spirit:vendor="xilinx.com" spirit:version="1.0"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">eyescan_subsystem_jtag_axi_0_0</spirit:configurableElementValue>
         </spirit:configurableElementValues>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-        <spirit:instanceName>mb_ps</spirit:instanceName>
-        <spirit:componentRef spirit:library="BlockDiagram/eyescan_subsystem_imp" spirit:name="mb_ps" spirit:vendor="xilinx.com" spirit:version="1.00.a"/>
       </spirit:componentInstance>
       <spirit:componentInstance>
         <spirit:instanceName>microblaze_1_axi_periph</spirit:instanceName>
@@ -162,7 +162,7 @@
       </spirit:interconnection>
       <spirit:interconnection>
         <spirit:name>microblaze_1_axi_periph_m01_axi</spirit:name>
-        <spirit:activeInterface spirit:busRef="AXI" spirit:componentRef="DRP_Bridge_hier"/>
+        <spirit:activeInterface spirit:busRef="AXI0" spirit:componentRef="DRP_Bridge_hier"/>
         <spirit:activeInterface spirit:busRef="M01_AXI" spirit:componentRef="microblaze_1_axi_periph"/>
       </spirit:interconnection>
       <spirit:interconnection>
@@ -206,11 +206,13 @@
         <spirit:name>axi_aclk_1</spirit:name>
         <spirit:externalPortReference spirit:portRef="AXI_aclk"/>
         <spirit:internalPortReference spirit:componentRef="DRP_Bridge_hier" spirit:portRef="AXI_aclk"/>
-        <spirit:internalPortReference spirit:componentRef="jtag_axi_0" spirit:portRef="aclk"/>
         <spirit:internalPortReference spirit:componentRef="mb_ps" spirit:portRef="S_AXI_ACLK"/>
+        <spirit:internalPortReference spirit:componentRef="jtag_axi_0" spirit:portRef="aclk"/>
         <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="ACLK"/>
+        <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="S00_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="M00_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="M01_ACLK"/>
+        <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="S01_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="M02_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="M03_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="M04_ACLK"/>
@@ -218,16 +220,16 @@
         <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="M06_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="M07_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="M08_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="S00_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="S01_ACLK"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>m07_aresetn_1</spirit:name>
         <spirit:internalPortReference spirit:componentRef="mb_ps" spirit:portRef="interconnect_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="jtag_axi_0" spirit:portRef="aresetn"/>
         <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="ARESETN"/>
+        <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="S00_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="M00_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="M01_ARESETN"/>
+        <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="S01_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="M02_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="M03_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="M04_ARESETN"/>
@@ -235,8 +237,6 @@
         <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="M06_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="M07_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="M08_ARESETN"/>
-        <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="S00_ARESETN"/>
-        <spirit:internalPortReference spirit:componentRef="microblaze_1_axi_periph" spirit:portRef="S01_ARESETN"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>proc_sys_reset_1_peripheral_aresetn</spirit:name>
@@ -250,29 +250,29 @@
       </spirit:adHocConnection>
     </spirit:adHocConnections>
     <spirit:hierConnections>
-      <spirit:hierConnection spirit:interfaceRef="gt_drp_0/drp_mux_0_gt_drp">
-        <spirit:activeInterface spirit:busRef="DRP7" spirit:componentRef="DRP_Bridge_hier"/>
+      <spirit:hierConnection spirit:interfaceRef="gt_drp_0/drp_mux_1_gt_drp">
+        <spirit:activeInterface spirit:busRef="DRP0" spirit:componentRef="DRP_Bridge_hier"/>
       </spirit:hierConnection>
-      <spirit:hierConnection spirit:interfaceRef="gt_drp_1/drp_mux_1_gt_drp">
-        <spirit:activeInterface spirit:busRef="DRP" spirit:componentRef="DRP_Bridge_hier"/>
-      </spirit:hierConnection>
-      <spirit:hierConnection spirit:interfaceRef="gt_drp_2/drp_mux_2_gt_drp">
+      <spirit:hierConnection spirit:interfaceRef="gt_drp_1/drp_mux_2_gt_drp">
         <spirit:activeInterface spirit:busRef="DRP1" spirit:componentRef="DRP_Bridge_hier"/>
       </spirit:hierConnection>
-      <spirit:hierConnection spirit:interfaceRef="gt_drp_3/drp_mux_3_gt_drp">
+      <spirit:hierConnection spirit:interfaceRef="gt_drp_2/drp_mux_3_gt_drp">
         <spirit:activeInterface spirit:busRef="DRP2" spirit:componentRef="DRP_Bridge_hier"/>
       </spirit:hierConnection>
-      <spirit:hierConnection spirit:interfaceRef="gt_drp_4/drp_bridge_4_drp">
+      <spirit:hierConnection spirit:interfaceRef="gt_drp_3/drp_bridge_4_drp">
         <spirit:activeInterface spirit:busRef="DRP3" spirit:componentRef="DRP_Bridge_hier"/>
       </spirit:hierConnection>
-      <spirit:hierConnection spirit:interfaceRef="gt_drp_5/drp_bridge_5_drp">
+      <spirit:hierConnection spirit:interfaceRef="gt_drp_4/drp_bridge_5_drp">
         <spirit:activeInterface spirit:busRef="DRP4" spirit:componentRef="DRP_Bridge_hier"/>
       </spirit:hierConnection>
-      <spirit:hierConnection spirit:interfaceRef="gt_drp_6/drp_bridge_6_drp">
+      <spirit:hierConnection spirit:interfaceRef="gt_drp_5/drp_bridge_6_drp">
         <spirit:activeInterface spirit:busRef="DRP5" spirit:componentRef="DRP_Bridge_hier"/>
       </spirit:hierConnection>
-      <spirit:hierConnection spirit:interfaceRef="gt_drp_7/drp_bridge_7_drp">
+      <spirit:hierConnection spirit:interfaceRef="gt_drp_6/drp_bridge_7_drp">
         <spirit:activeInterface spirit:busRef="DRP6" spirit:componentRef="DRP_Bridge_hier"/>
+      </spirit:hierConnection>
+      <spirit:hierConnection spirit:interfaceRef="gt_drp_7/drp_mux_0_gt_drp">
+        <spirit:activeInterface spirit:busRef="DRP7" spirit:componentRef="DRP_Bridge_hier"/>
       </spirit:hierConnection>
     </spirit:hierConnections>
   </spirit:design>
@@ -290,6 +290,12 @@
         <spirit:abstractionType spirit:library="interface" spirit:name="aximm_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
       </spirit:busInterface>
       <spirit:busInterface>
+        <spirit:name>S01_AXI</spirit:name>
+        <spirit:slave/>
+        <spirit:busType spirit:library="interface" spirit:name="aximm" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:abstractionType spirit:library="interface" spirit:name="aximm_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+      </spirit:busInterface>
+      <spirit:busInterface>
         <spirit:name>M00_AXI</spirit:name>
         <spirit:master/>
         <spirit:busType spirit:library="interface" spirit:name="aximm" spirit:vendor="xilinx.com" spirit:version="1.0"/>
@@ -298,12 +304,6 @@
       <spirit:busInterface>
         <spirit:name>M01_AXI</spirit:name>
         <spirit:master/>
-        <spirit:busType spirit:library="interface" spirit:name="aximm" spirit:vendor="xilinx.com" spirit:version="1.0"/>
-        <spirit:abstractionType spirit:library="interface" spirit:name="aximm_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
-      </spirit:busInterface>
-      <spirit:busInterface>
-        <spirit:name>S01_AXI</spirit:name>
-        <spirit:slave/>
         <spirit:busType spirit:library="interface" spirit:name="aximm" spirit:vendor="xilinx.com" spirit:version="1.0"/>
         <spirit:abstractionType spirit:library="interface" spirit:name="aximm_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
       </spirit:busInterface>
@@ -432,6 +432,52 @@
         </spirit:portMaps>
       </spirit:busInterface>
       <spirit:busInterface>
+        <spirit:name>CLK.S01_ACLK</spirit:name>
+        <spirit:displayName>Clk</spirit:displayName>
+        <spirit:description>Clock</spirit:description>
+        <spirit:busType spirit:library="signal" spirit:name="clock" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:abstractionType spirit:library="signal" spirit:name="clock_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:slave/>
+        <spirit:portMaps>
+          <spirit:portMap>
+            <spirit:logicalPort>
+              <spirit:name>CLK</spirit:name>
+            </spirit:logicalPort>
+            <spirit:physicalPort>
+              <spirit:name>S01_ACLK</spirit:name>
+            </spirit:physicalPort>
+          </spirit:portMap>
+        </spirit:portMaps>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>ASSOCIATED_BUSIF</spirit:name>
+            <spirit:value>S01_AXI</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>ASSOCIATED_RESET</spirit:name>
+            <spirit:value>S01_ARESETN</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:busInterface>
+      <spirit:busInterface>
+        <spirit:name>RST.S01_ARESETN</spirit:name>
+        <spirit:displayName>Reset</spirit:displayName>
+        <spirit:description>Reset</spirit:description>
+        <spirit:busType spirit:library="signal" spirit:name="reset" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:abstractionType spirit:library="signal" spirit:name="reset_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:slave/>
+        <spirit:portMaps>
+          <spirit:portMap>
+            <spirit:logicalPort>
+              <spirit:name>RST</spirit:name>
+            </spirit:logicalPort>
+            <spirit:physicalPort>
+              <spirit:name>S01_ARESETN</spirit:name>
+            </spirit:physicalPort>
+          </spirit:portMap>
+        </spirit:portMaps>
+      </spirit:busInterface>
+      <spirit:busInterface>
         <spirit:name>CLK.M00_ACLK</spirit:name>
         <spirit:displayName>Clk</spirit:displayName>
         <spirit:description>Clock</spirit:description>
@@ -519,52 +565,6 @@
             </spirit:logicalPort>
             <spirit:physicalPort>
               <spirit:name>M01_ARESETN</spirit:name>
-            </spirit:physicalPort>
-          </spirit:portMap>
-        </spirit:portMaps>
-      </spirit:busInterface>
-      <spirit:busInterface>
-        <spirit:name>CLK.S01_ACLK</spirit:name>
-        <spirit:displayName>Clk</spirit:displayName>
-        <spirit:description>Clock</spirit:description>
-        <spirit:busType spirit:library="signal" spirit:name="clock" spirit:vendor="xilinx.com" spirit:version="1.0"/>
-        <spirit:abstractionType spirit:library="signal" spirit:name="clock_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
-        <spirit:slave/>
-        <spirit:portMaps>
-          <spirit:portMap>
-            <spirit:logicalPort>
-              <spirit:name>CLK</spirit:name>
-            </spirit:logicalPort>
-            <spirit:physicalPort>
-              <spirit:name>S01_ACLK</spirit:name>
-            </spirit:physicalPort>
-          </spirit:portMap>
-        </spirit:portMaps>
-        <spirit:parameters>
-          <spirit:parameter>
-            <spirit:name>ASSOCIATED_BUSIF</spirit:name>
-            <spirit:value>S01_AXI</spirit:value>
-          </spirit:parameter>
-          <spirit:parameter>
-            <spirit:name>ASSOCIATED_RESET</spirit:name>
-            <spirit:value>S01_ARESETN</spirit:value>
-          </spirit:parameter>
-        </spirit:parameters>
-      </spirit:busInterface>
-      <spirit:busInterface>
-        <spirit:name>RST.S01_ARESETN</spirit:name>
-        <spirit:displayName>Reset</spirit:displayName>
-        <spirit:description>Reset</spirit:description>
-        <spirit:busType spirit:library="signal" spirit:name="reset" spirit:vendor="xilinx.com" spirit:version="1.0"/>
-        <spirit:abstractionType spirit:library="signal" spirit:name="reset_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
-        <spirit:slave/>
-        <spirit:portMaps>
-          <spirit:portMap>
-            <spirit:logicalPort>
-              <spirit:name>RST</spirit:name>
-            </spirit:logicalPort>
-            <spirit:physicalPort>
-              <spirit:name>S01_ARESETN</spirit:name>
             </spirit:physicalPort>
           </spirit:portMap>
         </spirit:portMaps>
@@ -934,6 +934,22 @@
           </spirit:wire>
         </spirit:port>
         <spirit:port>
+          <spirit:name>S01_ACLK</spirit:name>
+          <spirit:wire>
+            <spirit:direction>in</spirit:direction>
+          </spirit:wire>
+        </spirit:port>
+        <spirit:port>
+          <spirit:name>S01_ARESETN</spirit:name>
+          <spirit:wire>
+            <spirit:direction>in</spirit:direction>
+            <spirit:vector>
+              <spirit:left>0</spirit:left>
+              <spirit:right>0</spirit:right>
+            </spirit:vector>
+          </spirit:wire>
+        </spirit:port>
+        <spirit:port>
           <spirit:name>M00_ACLK</spirit:name>
           <spirit:wire>
             <spirit:direction>in</spirit:direction>
@@ -957,22 +973,6 @@
         </spirit:port>
         <spirit:port>
           <spirit:name>M01_ARESETN</spirit:name>
-          <spirit:wire>
-            <spirit:direction>in</spirit:direction>
-            <spirit:vector>
-              <spirit:left>0</spirit:left>
-              <spirit:right>0</spirit:right>
-            </spirit:vector>
-          </spirit:wire>
-        </spirit:port>
-        <spirit:port>
-          <spirit:name>S01_ACLK</spirit:name>
-          <spirit:wire>
-            <spirit:direction>in</spirit:direction>
-          </spirit:wire>
-        </spirit:port>
-        <spirit:port>
-          <spirit:name>S01_ARESETN</spirit:name>
           <spirit:wire>
             <spirit:direction>in</spirit:direction>
             <spirit:vector>
@@ -1275,14 +1275,14 @@
       <spirit:hierConnection spirit:interfaceRef="S00_AXI/microblaze_1_axi_periph_to_s00_couplers">
         <spirit:activeInterface spirit:busRef="S_AXI" spirit:componentRef="s00_couplers"/>
       </spirit:hierConnection>
+      <spirit:hierConnection spirit:interfaceRef="S01_AXI/microblaze_1_axi_periph_to_s01_couplers">
+        <spirit:activeInterface spirit:busRef="S_AXI" spirit:componentRef="s01_couplers"/>
+      </spirit:hierConnection>
       <spirit:hierConnection spirit:interfaceRef="M00_AXI/m00_couplers_to_microblaze_1_axi_periph">
         <spirit:activeInterface spirit:busRef="M_AXI" spirit:componentRef="m00_couplers"/>
       </spirit:hierConnection>
       <spirit:hierConnection spirit:interfaceRef="M01_AXI/m01_couplers_to_microblaze_1_axi_periph">
         <spirit:activeInterface spirit:busRef="M_AXI" spirit:componentRef="m01_couplers"/>
-      </spirit:hierConnection>
-      <spirit:hierConnection spirit:interfaceRef="S01_AXI/microblaze_1_axi_periph_to_s01_couplers">
-        <spirit:activeInterface spirit:busRef="S_AXI" spirit:componentRef="s01_couplers"/>
       </spirit:hierConnection>
       <spirit:hierConnection spirit:interfaceRef="M02_AXI/m02_couplers_to_microblaze_1_axi_periph">
         <spirit:activeInterface spirit:busRef="M_AXI" spirit:componentRef="m02_couplers"/>
@@ -3546,6 +3546,10 @@
     <spirit:version>1.00.a</spirit:version>
     <spirit:componentInstances>
       <spirit:componentInstance>
+        <spirit:instanceName>microblaze_1_local_memory</spirit:instanceName>
+        <spirit:componentRef spirit:library="BlockDiagram/eyescan_subsystem_imp/mb_ps_imp" spirit:name="microblaze_1_local_memory" spirit:vendor="xilinx.com" spirit:version="1.00.a"/>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
         <spirit:instanceName>axi_bram_ctrl_1</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="axi_bram_ctrl" spirit:vendor="xilinx.com" spirit:version="4.0"/>
         <spirit:configurableElementValues>
@@ -3602,10 +3606,6 @@
         <bd:hdl_attributes/>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>microblaze_1_local_memory</spirit:instanceName>
-        <spirit:componentRef spirit:library="BlockDiagram/eyescan_subsystem_imp/mb_ps_imp" spirit:name="microblaze_1_local_memory" spirit:vendor="xilinx.com" spirit:version="1.00.a"/>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
         <spirit:instanceName>proc_sys_reset_1</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="proc_sys_reset" spirit:vendor="xilinx.com" spirit:version="5.0"/>
         <spirit:configurableElementValues>
@@ -3653,9 +3653,9 @@
       <spirit:adHocConnection>
         <spirit:name>axi_aclk_1</spirit:name>
         <spirit:externalPortReference spirit:portRef="S_AXI_ACLK"/>
+        <spirit:internalPortReference spirit:componentRef="microblaze_1_local_memory" spirit:portRef="LMB_Clk"/>
         <spirit:internalPortReference spirit:componentRef="axi_bram_ctrl_1" spirit:portRef="s_axi_aclk"/>
         <spirit:internalPortReference spirit:componentRef="microblaze_1" spirit:portRef="Clk"/>
-        <spirit:internalPortReference spirit:componentRef="microblaze_1_local_memory" spirit:portRef="LMB_Clk"/>
         <spirit:internalPortReference spirit:componentRef="proc_sys_reset_1" spirit:portRef="slowest_sync_clk"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
@@ -3868,7 +3868,7 @@
     <spirit:version>1.00.a</spirit:version>
     <spirit:busInterfaces>
       <spirit:busInterface>
-        <spirit:name>AXI</spirit:name>
+        <spirit:name>AXI0</spirit:name>
         <spirit:slave/>
         <spirit:busType spirit:library="interface" spirit:name="aximm" spirit:vendor="xilinx.com" spirit:version="1.0"/>
         <spirit:abstractionType spirit:library="interface" spirit:name="aximm_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
@@ -3916,7 +3916,7 @@
         <spirit:abstractionType spirit:library="interface" spirit:name="aximm_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
       </spirit:busInterface>
       <spirit:busInterface>
-        <spirit:name>DRP</spirit:name>
+        <spirit:name>DRP0</spirit:name>
         <spirit:master/>
         <spirit:busType spirit:library="interface" spirit:name="drp" spirit:vendor="xilinx.com" spirit:version="1.0"/>
         <spirit:abstractionType spirit:library="interface" spirit:name="drp_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
@@ -4128,126 +4128,56 @@
       </spirit:adHocConnection>
     </spirit:adHocConnections>
     <spirit:hierConnections>
-      <spirit:hierConnection spirit:interfaceRef="AXI/microblaze_1_axi_periph_m01_axi">
-        <spirit:activeInterface spirit:busRef="AXI" spirit:componentRef="drp_bridge_1"/>
-      </spirit:hierConnection>
-      <spirit:hierConnection spirit:interfaceRef="AXI1/microblaze_1_axi_periph_m02_axi">
-        <spirit:activeInterface spirit:busRef="AXI" spirit:componentRef="drp_bridge_2"/>
-      </spirit:hierConnection>
-      <spirit:hierConnection spirit:interfaceRef="AXI2/microblaze_1_axi_periph_m03_axi">
-        <spirit:activeInterface spirit:busRef="AXI" spirit:componentRef="drp_bridge_3"/>
-      </spirit:hierConnection>
-      <spirit:hierConnection spirit:interfaceRef="AXI3/microblaze_1_axi_periph_m04_axi">
-        <spirit:activeInterface spirit:busRef="AXI" spirit:componentRef="drp_bridge_4"/>
-      </spirit:hierConnection>
-      <spirit:hierConnection spirit:interfaceRef="AXI4/microblaze_1_axi_periph_m05_axi">
-        <spirit:activeInterface spirit:busRef="AXI" spirit:componentRef="drp_bridge_5"/>
-      </spirit:hierConnection>
-      <spirit:hierConnection spirit:interfaceRef="AXI5/microblaze_1_axi_periph_m06_axi">
-        <spirit:activeInterface spirit:busRef="AXI" spirit:componentRef="drp_bridge_6"/>
-      </spirit:hierConnection>
-      <spirit:hierConnection spirit:interfaceRef="AXI6/microblaze_1_axi_periph_m07_axi">
-        <spirit:activeInterface spirit:busRef="AXI" spirit:componentRef="drp_bridge_7"/>
-      </spirit:hierConnection>
-      <spirit:hierConnection spirit:interfaceRef="AXI7/microblaze_1_axi_periph_m00_axi">
+      <spirit:hierConnection spirit:interfaceRef="AXI0/microblaze_1_axi_periph_m01_axi">
         <spirit:activeInterface spirit:busRef="AXI" spirit:componentRef="drp_bridge_0"/>
       </spirit:hierConnection>
-      <spirit:hierConnection spirit:interfaceRef="DRP/drp_mux_1_gt_drp">
-        <spirit:activeInterface spirit:busRef="DRP" spirit:componentRef="drp_bridge_1"/>
+      <spirit:hierConnection spirit:interfaceRef="AXI1/microblaze_1_axi_periph_m02_axi">
+        <spirit:activeInterface spirit:busRef="AXI" spirit:componentRef="drp_bridge_1"/>
+      </spirit:hierConnection>
+      <spirit:hierConnection spirit:interfaceRef="AXI2/microblaze_1_axi_periph_m03_axi">
+        <spirit:activeInterface spirit:busRef="AXI" spirit:componentRef="drp_bridge_2"/>
+      </spirit:hierConnection>
+      <spirit:hierConnection spirit:interfaceRef="AXI3/microblaze_1_axi_periph_m04_axi">
+        <spirit:activeInterface spirit:busRef="AXI" spirit:componentRef="drp_bridge_3"/>
+      </spirit:hierConnection>
+      <spirit:hierConnection spirit:interfaceRef="AXI4/microblaze_1_axi_periph_m05_axi">
+        <spirit:activeInterface spirit:busRef="AXI" spirit:componentRef="drp_bridge_4"/>
+      </spirit:hierConnection>
+      <spirit:hierConnection spirit:interfaceRef="AXI5/microblaze_1_axi_periph_m06_axi">
+        <spirit:activeInterface spirit:busRef="AXI" spirit:componentRef="drp_bridge_5"/>
+      </spirit:hierConnection>
+      <spirit:hierConnection spirit:interfaceRef="AXI6/microblaze_1_axi_periph_m07_axi">
+        <spirit:activeInterface spirit:busRef="AXI" spirit:componentRef="drp_bridge_6"/>
+      </spirit:hierConnection>
+      <spirit:hierConnection spirit:interfaceRef="AXI7/microblaze_1_axi_periph_m00_axi">
+        <spirit:activeInterface spirit:busRef="AXI" spirit:componentRef="drp_bridge_7"/>
+      </spirit:hierConnection>
+      <spirit:hierConnection spirit:interfaceRef="DRP0/drp_mux_1_gt_drp">
+        <spirit:activeInterface spirit:busRef="DRP" spirit:componentRef="drp_bridge_0"/>
       </spirit:hierConnection>
       <spirit:hierConnection spirit:interfaceRef="DRP1/drp_mux_2_gt_drp">
-        <spirit:activeInterface spirit:busRef="DRP" spirit:componentRef="drp_bridge_2"/>
+        <spirit:activeInterface spirit:busRef="DRP" spirit:componentRef="drp_bridge_1"/>
       </spirit:hierConnection>
       <spirit:hierConnection spirit:interfaceRef="DRP2/drp_mux_3_gt_drp">
-        <spirit:activeInterface spirit:busRef="DRP" spirit:componentRef="drp_bridge_3"/>
+        <spirit:activeInterface spirit:busRef="DRP" spirit:componentRef="drp_bridge_2"/>
       </spirit:hierConnection>
       <spirit:hierConnection spirit:interfaceRef="DRP3/drp_bridge_4_drp">
-        <spirit:activeInterface spirit:busRef="DRP" spirit:componentRef="drp_bridge_4"/>
+        <spirit:activeInterface spirit:busRef="DRP" spirit:componentRef="drp_bridge_3"/>
       </spirit:hierConnection>
       <spirit:hierConnection spirit:interfaceRef="DRP4/drp_bridge_5_drp">
-        <spirit:activeInterface spirit:busRef="DRP" spirit:componentRef="drp_bridge_5"/>
+        <spirit:activeInterface spirit:busRef="DRP" spirit:componentRef="drp_bridge_4"/>
       </spirit:hierConnection>
       <spirit:hierConnection spirit:interfaceRef="DRP5/drp_bridge_6_drp">
-        <spirit:activeInterface spirit:busRef="DRP" spirit:componentRef="drp_bridge_6"/>
+        <spirit:activeInterface spirit:busRef="DRP" spirit:componentRef="drp_bridge_5"/>
       </spirit:hierConnection>
       <spirit:hierConnection spirit:interfaceRef="DRP6/drp_bridge_7_drp">
-        <spirit:activeInterface spirit:busRef="DRP" spirit:componentRef="drp_bridge_7"/>
+        <spirit:activeInterface spirit:busRef="DRP" spirit:componentRef="drp_bridge_6"/>
       </spirit:hierConnection>
       <spirit:hierConnection spirit:interfaceRef="DRP7/drp_mux_0_gt_drp">
-        <spirit:activeInterface spirit:busRef="DRP" spirit:componentRef="drp_bridge_0"/>
+        <spirit:activeInterface spirit:busRef="DRP" spirit:componentRef="drp_bridge_7"/>
       </spirit:hierConnection>
     </spirit:hierConnections>
   </spirit:design>
-
-  <spirit:component xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009">
-    <spirit:vendor>xilinx.com</spirit:vendor>
-    <spirit:library>Addressing/jtag_axi_0</spirit:library>
-    <spirit:name>jtag_axi</spirit:name>
-    <spirit:version>1.0</spirit:version>
-    <spirit:addressSpaces>
-      <spirit:addressSpace>
-        <spirit:name>Data</spirit:name>
-        <spirit:range>4G</spirit:range>
-        <spirit:width>32</spirit:width>
-        <spirit:segments>
-          <spirit:segment>
-            <spirit:name>SEG_axi_bram_ctrl_1_Mem0</spirit:name>
-            <spirit:displayName>/mb_ps/axi_bram_ctrl_1/S_AXI/Mem0</spirit:displayName>
-            <spirit:addressOffset>0xC2000000</spirit:addressOffset>
-            <spirit:range>16K</spirit:range>
-          </spirit:segment>
-          <spirit:segment>
-            <spirit:name>SEG_drp_bridge_0_reg0</spirit:name>
-            <spirit:displayName>/DRP_Bridge_hier/drp_bridge_0/AXI/reg0</spirit:displayName>
-            <spirit:addressOffset>0xC0000000</spirit:addressOffset>
-            <spirit:range>4K</spirit:range>
-          </spirit:segment>
-          <spirit:segment>
-            <spirit:name>SEG_drp_bridge_1_reg0</spirit:name>
-            <spirit:displayName>/DRP_Bridge_hier/drp_bridge_1/AXI/reg0</spirit:displayName>
-            <spirit:addressOffset>0xC0001000</spirit:addressOffset>
-            <spirit:range>4K</spirit:range>
-          </spirit:segment>
-          <spirit:segment>
-            <spirit:name>SEG_drp_bridge_2_reg0</spirit:name>
-            <spirit:displayName>/DRP_Bridge_hier/drp_bridge_2/AXI/reg0</spirit:displayName>
-            <spirit:addressOffset>0xC0002000</spirit:addressOffset>
-            <spirit:range>4K</spirit:range>
-          </spirit:segment>
-          <spirit:segment>
-            <spirit:name>SEG_drp_bridge_3_reg0</spirit:name>
-            <spirit:displayName>/DRP_Bridge_hier/drp_bridge_3/AXI/reg0</spirit:displayName>
-            <spirit:addressOffset>0xC0003000</spirit:addressOffset>
-            <spirit:range>4K</spirit:range>
-          </spirit:segment>
-          <spirit:segment>
-            <spirit:name>SEG_drp_bridge_4_reg0</spirit:name>
-            <spirit:displayName>/DRP_Bridge_hier/drp_bridge_4/AXI/reg0</spirit:displayName>
-            <spirit:addressOffset>0xC0004000</spirit:addressOffset>
-            <spirit:range>4K</spirit:range>
-          </spirit:segment>
-          <spirit:segment>
-            <spirit:name>SEG_drp_bridge_5_reg0</spirit:name>
-            <spirit:displayName>/DRP_Bridge_hier/drp_bridge_5/AXI/reg0</spirit:displayName>
-            <spirit:addressOffset>0xC0005000</spirit:addressOffset>
-            <spirit:range>4K</spirit:range>
-          </spirit:segment>
-          <spirit:segment>
-            <spirit:name>SEG_drp_bridge_6_reg0</spirit:name>
-            <spirit:displayName>/DRP_Bridge_hier/drp_bridge_6/AXI/reg0</spirit:displayName>
-            <spirit:addressOffset>0xC0006000</spirit:addressOffset>
-            <spirit:range>4K</spirit:range>
-          </spirit:segment>
-          <spirit:segment>
-            <spirit:name>SEG_drp_bridge_7_reg0</spirit:name>
-            <spirit:displayName>/DRP_Bridge_hier/drp_bridge_7/AXI/reg0</spirit:displayName>
-            <spirit:addressOffset>0xC0007000</spirit:addressOffset>
-            <spirit:range>4K</spirit:range>
-          </spirit:segment>
-        </spirit:segments>
-      </spirit:addressSpace>
-    </spirit:addressSpaces>
-  </spirit:component>
 
   <spirit:component xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009">
     <spirit:vendor>xilinx.com</spirit:vendor>
@@ -4269,61 +4199,61 @@
         <spirit:width>32</spirit:width>
         <spirit:segments>
           <spirit:segment>
-            <spirit:name>SEG2</spirit:name>
-            <spirit:displayName>/mb_ps/microblaze_1_local_memory/dlmb_bram_if_cntlr/SLMB/Mem</spirit:displayName>
-            <spirit:addressOffset>0x0</spirit:addressOffset>
-            <spirit:range>16K</spirit:range>
-          </spirit:segment>
-          <spirit:segment>
             <spirit:name>SEG_axi_bram_ctrl_1_Mem0</spirit:name>
             <spirit:displayName>/mb_ps/axi_bram_ctrl_1/S_AXI/Mem0</spirit:displayName>
             <spirit:addressOffset>0xC2000000</spirit:addressOffset>
             <spirit:range>16K</spirit:range>
           </spirit:segment>
           <spirit:segment>
-            <spirit:name>SEG_drp_bridge_0_reg0</spirit:name>
+            <spirit:name>SEG2</spirit:name>
+            <spirit:displayName>/mb_ps/microblaze_1_local_memory/dlmb_bram_if_cntlr/SLMB/Mem</spirit:displayName>
+            <spirit:addressOffset>0x0</spirit:addressOffset>
+            <spirit:range>16K</spirit:range>
+          </spirit:segment>
+          <spirit:segment>
+            <spirit:name>SEG_drp_bridge_1_reg0</spirit:name>
             <spirit:displayName>/DRP_Bridge_hier/drp_bridge_0/AXI/reg0</spirit:displayName>
             <spirit:addressOffset>0xC0000000</spirit:addressOffset>
             <spirit:range>4K</spirit:range>
           </spirit:segment>
           <spirit:segment>
-            <spirit:name>SEG_drp_bridge_1_reg0</spirit:name>
+            <spirit:name>SEG_drp_bridge_2_reg0</spirit:name>
             <spirit:displayName>/DRP_Bridge_hier/drp_bridge_1/AXI/reg0</spirit:displayName>
             <spirit:addressOffset>0xC0001000</spirit:addressOffset>
             <spirit:range>4K</spirit:range>
           </spirit:segment>
           <spirit:segment>
-            <spirit:name>SEG_drp_bridge_2_reg0</spirit:name>
+            <spirit:name>SEG_drp_bridge_3_reg0</spirit:name>
             <spirit:displayName>/DRP_Bridge_hier/drp_bridge_2/AXI/reg0</spirit:displayName>
             <spirit:addressOffset>0xC0002000</spirit:addressOffset>
             <spirit:range>4K</spirit:range>
           </spirit:segment>
           <spirit:segment>
-            <spirit:name>SEG_drp_bridge_3_reg0</spirit:name>
+            <spirit:name>SEG_drp_bridge_4_reg0</spirit:name>
             <spirit:displayName>/DRP_Bridge_hier/drp_bridge_3/AXI/reg0</spirit:displayName>
             <spirit:addressOffset>0xC0003000</spirit:addressOffset>
             <spirit:range>4K</spirit:range>
           </spirit:segment>
           <spirit:segment>
-            <spirit:name>SEG_drp_bridge_4_reg0</spirit:name>
+            <spirit:name>SEG_drp_bridge_5_reg0</spirit:name>
             <spirit:displayName>/DRP_Bridge_hier/drp_bridge_4/AXI/reg0</spirit:displayName>
             <spirit:addressOffset>0xC0004000</spirit:addressOffset>
             <spirit:range>4K</spirit:range>
           </spirit:segment>
           <spirit:segment>
-            <spirit:name>SEG_drp_bridge_5_reg0</spirit:name>
+            <spirit:name>SEG_drp_bridge_6_reg0</spirit:name>
             <spirit:displayName>/DRP_Bridge_hier/drp_bridge_5/AXI/reg0</spirit:displayName>
             <spirit:addressOffset>0xC0005000</spirit:addressOffset>
             <spirit:range>4K</spirit:range>
           </spirit:segment>
           <spirit:segment>
-            <spirit:name>SEG_drp_bridge_6_reg0</spirit:name>
+            <spirit:name>SEG_drp_bridge_7_reg0</spirit:name>
             <spirit:displayName>/DRP_Bridge_hier/drp_bridge_6/AXI/reg0</spirit:displayName>
             <spirit:addressOffset>0xC0006000</spirit:addressOffset>
             <spirit:range>4K</spirit:range>
           </spirit:segment>
           <spirit:segment>
-            <spirit:name>SEG_drp_bridge_7_reg0</spirit:name>
+            <spirit:name>SEG_drp_bridge_0_reg0</spirit:name>
             <spirit:displayName>/DRP_Bridge_hier/drp_bridge_7/AXI/reg0</spirit:displayName>
             <spirit:addressOffset>0xC0007000</spirit:addressOffset>
             <spirit:range>4K</spirit:range>
@@ -4340,6 +4270,76 @@
             <spirit:displayName>/mb_ps/microblaze_1_local_memory/ilmb_bram_if_cntlr/SLMB/Mem</spirit:displayName>
             <spirit:addressOffset>0x0</spirit:addressOffset>
             <spirit:range>16K</spirit:range>
+          </spirit:segment>
+        </spirit:segments>
+      </spirit:addressSpace>
+    </spirit:addressSpaces>
+  </spirit:component>
+
+  <spirit:component xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009">
+    <spirit:vendor>xilinx.com</spirit:vendor>
+    <spirit:library>Addressing/jtag_axi_0</spirit:library>
+    <spirit:name>jtag_axi</spirit:name>
+    <spirit:version>1.0</spirit:version>
+    <spirit:addressSpaces>
+      <spirit:addressSpace>
+        <spirit:name>Data</spirit:name>
+        <spirit:range>4G</spirit:range>
+        <spirit:width>32</spirit:width>
+        <spirit:segments>
+          <spirit:segment>
+            <spirit:name>SEG_axi_bram_ctrl_1_Mem0</spirit:name>
+            <spirit:displayName>/mb_ps/axi_bram_ctrl_1/S_AXI/Mem0</spirit:displayName>
+            <spirit:addressOffset>0xC2000000</spirit:addressOffset>
+            <spirit:range>16K</spirit:range>
+          </spirit:segment>
+          <spirit:segment>
+            <spirit:name>SEG_drp_bridge_1_reg0</spirit:name>
+            <spirit:displayName>/DRP_Bridge_hier/drp_bridge_0/AXI/reg0</spirit:displayName>
+            <spirit:addressOffset>0xC0000000</spirit:addressOffset>
+            <spirit:range>4K</spirit:range>
+          </spirit:segment>
+          <spirit:segment>
+            <spirit:name>SEG_drp_bridge_2_reg0</spirit:name>
+            <spirit:displayName>/DRP_Bridge_hier/drp_bridge_1/AXI/reg0</spirit:displayName>
+            <spirit:addressOffset>0xC0001000</spirit:addressOffset>
+            <spirit:range>4K</spirit:range>
+          </spirit:segment>
+          <spirit:segment>
+            <spirit:name>SEG_drp_bridge_3_reg0</spirit:name>
+            <spirit:displayName>/DRP_Bridge_hier/drp_bridge_2/AXI/reg0</spirit:displayName>
+            <spirit:addressOffset>0xC0002000</spirit:addressOffset>
+            <spirit:range>4K</spirit:range>
+          </spirit:segment>
+          <spirit:segment>
+            <spirit:name>SEG_drp_bridge_4_reg0</spirit:name>
+            <spirit:displayName>/DRP_Bridge_hier/drp_bridge_3/AXI/reg0</spirit:displayName>
+            <spirit:addressOffset>0xC0003000</spirit:addressOffset>
+            <spirit:range>4K</spirit:range>
+          </spirit:segment>
+          <spirit:segment>
+            <spirit:name>SEG_drp_bridge_5_reg0</spirit:name>
+            <spirit:displayName>/DRP_Bridge_hier/drp_bridge_4/AXI/reg0</spirit:displayName>
+            <spirit:addressOffset>0xC0004000</spirit:addressOffset>
+            <spirit:range>4K</spirit:range>
+          </spirit:segment>
+          <spirit:segment>
+            <spirit:name>SEG_drp_bridge_6_reg0</spirit:name>
+            <spirit:displayName>/DRP_Bridge_hier/drp_bridge_5/AXI/reg0</spirit:displayName>
+            <spirit:addressOffset>0xC0005000</spirit:addressOffset>
+            <spirit:range>4K</spirit:range>
+          </spirit:segment>
+          <spirit:segment>
+            <spirit:name>SEG_drp_bridge_7_reg0</spirit:name>
+            <spirit:displayName>/DRP_Bridge_hier/drp_bridge_6/AXI/reg0</spirit:displayName>
+            <spirit:addressOffset>0xC0006000</spirit:addressOffset>
+            <spirit:range>4K</spirit:range>
+          </spirit:segment>
+          <spirit:segment>
+            <spirit:name>SEG_drp_bridge_0_reg0</spirit:name>
+            <spirit:displayName>/DRP_Bridge_hier/drp_bridge_7/AXI/reg0</spirit:displayName>
+            <spirit:addressOffset>0xC0007000</spirit:addressOffset>
+            <spirit:range>4K</spirit:range>
           </spirit:segment>
         </spirit:segments>
       </spirit:addressSpace>

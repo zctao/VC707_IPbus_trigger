@@ -12,6 +12,8 @@
     <Option Name="BoardPart" Val="xilinx.com:vc707:part0:1.0"/>
     <Option Name="ActiveSimSet" Val="sim_1"/>
     <Option Name="DefaultLib" Val="xil_defaultlib"/>
+    <Option Name="IPRepoPath" Val="$PPRDIR/eyescan_source/custom_ip"/>
+    <Option Name="IPRepoPath" Val="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip"/>
   </Configuration>
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
@@ -103,6 +105,49 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/eyescan_subsystem.bd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_microblaze_1_axi_periph_0/eyescan_subsystem_microblaze_1_axi_periph_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_drp_bridge_7_0/eyescan_subsystem_drp_bridge_7_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_drp_bridge_6_0/eyescan_subsystem_drp_bridge_6_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_drp_bridge_4_0/eyescan_subsystem_drp_bridge_4_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_drp_bridge_3_0/eyescan_subsystem_drp_bridge_3_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_drp_bridge_2_0/eyescan_subsystem_drp_bridge_2_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_drp_bridge_1_0/eyescan_subsystem_drp_bridge_1_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_drp_bridge_0_0/eyescan_subsystem_drp_bridge_0_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_drp_bridge_5_0/eyescan_subsystem_drp_bridge_5_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_dlmb_bram_if_cntlr_0/eyescan_subsystem_dlmb_bram_if_cntlr_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_microblaze_1_0/eyescan_subsystem_microblaze_1_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_mdm_1_0/eyescan_subsystem_mdm_1_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_blk_mem_gen_1_0/eyescan_subsystem_blk_mem_gen_1_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_dlmb_v10_0/eyescan_subsystem_dlmb_v10_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_axi_bram_ctrl_1_0/eyescan_subsystem_axi_bram_ctrl_1_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_jtag_axi_0_0/eyescan_subsystem_jtag_axi_0_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_xlconstant_1_0/eyescan_subsystem_xlconstant_1_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_proc_sys_reset_1_0/eyescan_subsystem_proc_sys_reset_1_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_lmb_bram_0/eyescan_subsystem_lmb_bram_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_ilmb_v10_0/eyescan_subsystem_ilmb_v10_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_ilmb_bram_if_cntlr_0/eyescan_subsystem_ilmb_bram_if_cntlr_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_auto_pc_2/eyescan_subsystem_auto_pc_2.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_xbar_0/eyescan_subsystem_xbar_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="hdl/eyescan_subsystem.v"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="eyescan_subsystem_ooc.xdc"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="eyescan_subsystem.bmm"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="hw_handoff/eyescan_subsystem.hwh"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="hw_handoff/eyescan_subsystem_bd.tcl"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_auto_pc_1/eyescan_subsystem_auto_pc_1.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_auto_pc_0/eyescan_subsystem_auto_pc_0.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_auto_pc_7/eyescan_subsystem_auto_pc_7.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_auto_pc_8/eyescan_subsystem_auto_pc_8.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_auto_pc_5/eyescan_subsystem_auto_pc_5.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_auto_pc_4/eyescan_subsystem_auto_pc_4.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_auto_pc_6/eyescan_subsystem_auto_pc_6.xci"/>
+        <CompFileExtendedInfo CompFileName="eyescan_subsystem.bd" FileRelPathName="ip/eyescan_subsystem_auto_pc_3/eyescan_subsystem_auto_pc_3.xci"/>
       </File>
       <File Path="$PSRCDIR/sources_1/imports/new/TrackletProjections_test.v">
         <FileInfo>
@@ -802,6 +847,35 @@
       <File Path="$PSRCDIR/sources_1/ip/trigger_clock_synth/trigger_clock_synth.upgrade_log"/>
       <File Path="$PSRCDIR/sources_1/ip/trigger_clock_synth_0/trigger_clock_synth.upgrade_log"/>
       <File Path="$PSRCDIR/sources_1/ip/TP_track_fit_fifo/TP_track_fit_fifo.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_drp_bridge_1_0/eyescan_subsystem_drp_bridge_1_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_drp_bridge_2_0/eyescan_subsystem_drp_bridge_2_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_drp_bridge_3_0/eyescan_subsystem_drp_bridge_3_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_drp_bridge_4_0/eyescan_subsystem_drp_bridge_4_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_drp_bridge_5_0/eyescan_subsystem_drp_bridge_5_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_drp_bridge_6_0/eyescan_subsystem_drp_bridge_6_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_drp_bridge_7_0/eyescan_subsystem_drp_bridge_7_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_axi_bram_ctrl_1_0/eyescan_subsystem_axi_bram_ctrl_1_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_blk_mem_gen_1_0/eyescan_subsystem_blk_mem_gen_1_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_dlmb_bram_if_cntlr_0/eyescan_subsystem_dlmb_bram_if_cntlr_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_dlmb_v10_0/eyescan_subsystem_dlmb_v10_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_drp_bridge_0_0/eyescan_subsystem_drp_bridge_0_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_ilmb_bram_if_cntlr_0/eyescan_subsystem_ilmb_bram_if_cntlr_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_ilmb_v10_0/eyescan_subsystem_ilmb_v10_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_jtag_axi_0_0/eyescan_subsystem_jtag_axi_0_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_lmb_bram_0/eyescan_subsystem_lmb_bram_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_mdm_1_0/eyescan_subsystem_mdm_1_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_microblaze_1_0/eyescan_subsystem_microblaze_1_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_microblaze_1_axi_periph_0/eyescan_subsystem_microblaze_1_axi_periph_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_proc_sys_reset_1_0/eyescan_subsystem_proc_sys_reset_1_0.upgrade_log"/>
+      <File Path="$PSRCDIR/sources_1/bd/eyescan_subsystem/ip/eyescan_subsystem_xlconstant_1_0/eyescan_subsystem_xlconstant_1_0.upgrade_log"/>
+      <File Path="$PSDKDIR/eyescan_software/Debug/eyescan_software.elf">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="ScopedToRef" Val="eyescan_subsystem"/>
+          <Attr Name="ScopedToCell" Val="mb_ps/microblaze_1"/>
+          <Attr Name="IsVisible" Val="1"/>
+        </FileInfo>
+      </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="top"/>
@@ -1019,6 +1093,12 @@
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSDKDIR/eyescan_software/Debug/eyescan_software.elf">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="simulation"/>
+          <Attr Name="IsVisible" Val="1"/>
         </FileInfo>
       </File>
       <Config>
