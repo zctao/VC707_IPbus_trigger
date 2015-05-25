@@ -938,60 +938,6 @@
         </spirit:parameters>
       </spirit:view>
       <spirit:view>
-        <spirit:name>xilinx_vhdlsynthesis</spirit:name>
-        <spirit:displayName>VHDL Synthesis</spirit:displayName>
-        <spirit:envIdentifier>vhdlSource:vivado.xilinx.com:synthesis</spirit:envIdentifier>
-        <spirit:language>vhdl</spirit:language>
-        <spirit:fileSetRef>
-          <spirit:localName>xilinx_vhdlsynthesis_view_fileset</spirit:localName>
-        </spirit:fileSetRef>
-        <spirit:parameters>
-          <spirit:parameter>
-            <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>df3c3d94</spirit:value>
-          </spirit:parameter>
-          <spirit:parameter>
-            <spirit:name>customizationCRCversion</spirit:name>
-            <spirit:value>4</spirit:value>
-          </spirit:parameter>
-          <spirit:parameter>
-            <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Wed May 06 20:29:20 UTC 2015</spirit:value>
-          </spirit:parameter>
-          <spirit:parameter>
-            <spirit:name>StaleAtRelink</spirit:name>
-            <spirit:value>false</spirit:value>
-          </spirit:parameter>
-        </spirit:parameters>
-      </spirit:view>
-      <spirit:view>
-        <spirit:name>xilinx_vhdlsynthesiswrapper</spirit:name>
-        <spirit:displayName>VHDL Synthesis Wrapper</spirit:displayName>
-        <spirit:envIdentifier>vhdlSource:vivado.xilinx.com:synthesis.wrapper</spirit:envIdentifier>
-        <spirit:language>vhdl</spirit:language>
-        <spirit:fileSetRef>
-          <spirit:localName>xilinx_vhdlsynthesiswrapper_view_fileset</spirit:localName>
-        </spirit:fileSetRef>
-        <spirit:parameters>
-          <spirit:parameter>
-            <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>df3c3d94</spirit:value>
-          </spirit:parameter>
-          <spirit:parameter>
-            <spirit:name>customizationCRCversion</spirit:name>
-            <spirit:value>4</spirit:value>
-          </spirit:parameter>
-          <spirit:parameter>
-            <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Wed May 06 20:29:20 UTC 2015</spirit:value>
-          </spirit:parameter>
-          <spirit:parameter>
-            <spirit:name>StaleAtRelink</spirit:name>
-            <spirit:value>false</spirit:value>
-          </spirit:parameter>
-        </spirit:parameters>
-      </spirit:view>
-      <spirit:view>
         <spirit:name>xilinx_vhdlbehavioralsimulation</spirit:name>
         <spirit:displayName>VHDL Simulation</spirit:displayName>
         <spirit:envIdentifier>vhdlSource:vivado.xilinx.com:simulation</spirit:envIdentifier>
@@ -1064,6 +1010,60 @@
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
             <spirit:value>Wed May 06 20:29:20 UTC 2015</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>StaleAtRelink</spirit:name>
+            <spirit:value>false</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_vhdlsynthesis</spirit:name>
+        <spirit:displayName>VHDL Synthesis</spirit:displayName>
+        <spirit:envIdentifier>vhdlSource:vivado.xilinx.com:synthesis</spirit:envIdentifier>
+        <spirit:language>vhdl</spirit:language>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_vhdlsynthesis_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>customizationCRC</spirit:name>
+            <spirit:value>4c3070f3</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>customizationCRCversion</spirit:name>
+            <spirit:value>4</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>GENtimestamp</spirit:name>
+            <spirit:value>Wed May 06 20:29:20 UTC 2015</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>StaleAtRelink</spirit:name>
+            <spirit:value>false</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_vhdlsynthesiswrapper</spirit:name>
+        <spirit:displayName>VHDL Synthesis Wrapper</spirit:displayName>
+        <spirit:envIdentifier>vhdlSource:vivado.xilinx.com:synthesis.wrapper</spirit:envIdentifier>
+        <spirit:language>vhdl</spirit:language>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_vhdlsynthesiswrapper_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>customizationCRC</spirit:name>
+            <spirit:value>4c3070f3</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>customizationCRCversion</spirit:name>
+            <spirit:value>4</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>GENtimestamp</spirit:name>
+            <spirit:value>Mon May 11 16:16:05 UTC 2015</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>StaleAtRelink</spirit:name>
@@ -2847,7 +2847,7 @@
       <spirit:modelParameter spirit:dataType="std_logic_vector(0 to 31)">
         <spirit:name>C_HIGHADDR</spirit:name>
         <spirit:displayName>LMB BRAM High Address</spirit:displayName>
-        <spirit:value spirit:format="bitString" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HIGHADDR" spirit:bitStringLength="32">0x00003FFF</spirit:value>
+        <spirit:value spirit:format="bitString" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HIGHADDR" spirit:bitStringLength="32">0x0007FFFF</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="std_logic_vector(0 to 31)">
         <spirit:name>C_BASEADDR</spirit:name>
@@ -3188,79 +3188,6 @@
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
-      <spirit:name>xilinx_vhdlsynthesis_view_fileset</spirit:name>
-      <spirit:file>
-        <spirit:name>eyescan_subsystem_dlmb_bram_if_cntlr_0_ooc.xdc</spirit:name>
-        <spirit:userFileType>xdc</spirit:userFileType>
-        <spirit:userFileType>USED_IN_out_of_context</spirit:userFileType>
-        <spirit:userFileType>USED_IN_synthesis</spirit:userFileType>
-        <spirit:userFileType>USED_IN_implementation</spirit:userFileType>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/lmb_bram_if_funcs.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/xor18.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/parity.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/parityenable.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/checkbit_handler.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/correct_one_bit.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/pselect.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/pselect_mask.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/axi_interface.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/lmb_mux.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/lmb_bram_if_cntlr.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
-      </spirit:file>
-    </spirit:fileSet>
-    <spirit:fileSet>
-      <spirit:name>xilinx_vhdlsynthesiswrapper_view_fileset</spirit:name>
-      <spirit:file>
-        <spirit:name>synth/eyescan_subsystem_dlmb_bram_if_cntlr_0.vhd</spirit:name>
-        <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
-      </spirit:file>
-    </spirit:fileSet>
-    <spirit:fileSet>
       <spirit:name>xilinx_vhdlbehavioralsimulation_view_fileset</spirit:name>
       <spirit:file>
         <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/lmb_bram_if_funcs.vhd</spirit:name>
@@ -3333,6 +3260,79 @@
         <spirit:userFileType>text</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_vhdlsynthesis_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>eyescan_subsystem_dlmb_bram_if_cntlr_0_ooc.xdc</spirit:name>
+        <spirit:userFileType>xdc</spirit:userFileType>
+        <spirit:userFileType>USED_IN_out_of_context</spirit:userFileType>
+        <spirit:userFileType>USED_IN_synthesis</spirit:userFileType>
+        <spirit:userFileType>USED_IN_implementation</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/lmb_bram_if_funcs.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/xor18.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/parity.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/parityenable.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/checkbit_handler.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/correct_one_bit.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/pselect.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/pselect_mask.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/axi_interface.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/lmb_mux.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>../../../../ipshared/xilinx.com/lmb_bram_if_cntlr_v4_0/ed8e0b57/hdl/vhdl/lmb_bram_if_cntlr.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>lmb_bram_if_cntlr_v4_0</spirit:logicalName>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_vhdlsynthesiswrapper_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>synth/eyescan_subsystem_dlmb_bram_if_cntlr_0.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+    </spirit:fileSet>
   </spirit:fileSets>
   <spirit:description>Local Memory Bus (LMB) Block RAM (BRAM) Interface Controller connects to an lmb bus</spirit:description>
   <spirit:parameters>
@@ -3344,7 +3344,7 @@
     <spirit:parameter>
       <spirit:name>C_HIGHADDR</spirit:name>
       <spirit:displayName>LMB BRAM High Address</spirit:displayName>
-      <spirit:value spirit:format="bitString" spirit:resolve="user" spirit:id="PARAM_VALUE.C_HIGHADDR" spirit:order="1200" spirit:configGroups="1 Addresses" spirit:bitStringLength="32">0x00003FFF</spirit:value>
+      <spirit:value spirit:format="bitString" spirit:resolve="user" spirit:id="PARAM_VALUE.C_HIGHADDR" spirit:order="1200" spirit:configGroups="1 Addresses" spirit:bitStringLength="32">0x0007FFFF</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_MASK</spirit:name>

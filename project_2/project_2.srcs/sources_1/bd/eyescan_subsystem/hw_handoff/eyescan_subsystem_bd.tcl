@@ -311,21 +311,7 @@ proc create_hier_cell_DRP_Bridge_hier { parentCell nameHier } {
 
   # Create interface pins
   create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 AXI0
-  create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 AXI1
-  create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 AXI2
-  create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 AXI3
-  create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 AXI4
-  create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 AXI5
-  create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 AXI6
-  create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 AXI7
   create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:drp_rtl:1.0 DRP0
-  create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:drp_rtl:1.0 DRP1
-  create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:drp_rtl:1.0 DRP2
-  create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:drp_rtl:1.0 DRP3
-  create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:drp_rtl:1.0 DRP4
-  create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:drp_rtl:1.0 DRP5
-  create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:drp_rtl:1.0 DRP6
-  create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:drp_rtl:1.0 DRP7
 
   # Create pins
   create_bd_pin -dir I -type clk AXI_aclk
@@ -335,55 +321,13 @@ proc create_hier_cell_DRP_Bridge_hier { parentCell nameHier } {
   set drp_bridge_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:drp_bridge:1.0 drp_bridge_0 ]
   set_property -dict [ list CONFIG.C_S_AXI_ADDR_WIDTH {24}  ] $drp_bridge_0
 
-  # Create instance: drp_bridge_1, and set properties
-  set drp_bridge_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:drp_bridge:1.0 drp_bridge_1 ]
-  set_property -dict [ list CONFIG.C_S_AXI_ADDR_WIDTH {24}  ] $drp_bridge_1
-
-  # Create instance: drp_bridge_2, and set properties
-  set drp_bridge_2 [ create_bd_cell -type ip -vlnv xilinx.com:ip:drp_bridge:1.0 drp_bridge_2 ]
-  set_property -dict [ list CONFIG.C_S_AXI_ADDR_WIDTH {24}  ] $drp_bridge_2
-
-  # Create instance: drp_bridge_3, and set properties
-  set drp_bridge_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:drp_bridge:1.0 drp_bridge_3 ]
-  set_property -dict [ list CONFIG.C_S_AXI_ADDR_WIDTH {24}  ] $drp_bridge_3
-
-  # Create instance: drp_bridge_4, and set properties
-  set drp_bridge_4 [ create_bd_cell -type ip -vlnv xilinx.com:ip:drp_bridge:1.0 drp_bridge_4 ]
-  set_property -dict [ list CONFIG.C_S_AXI_ADDR_WIDTH {24}  ] $drp_bridge_4
-
-  # Create instance: drp_bridge_5, and set properties
-  set drp_bridge_5 [ create_bd_cell -type ip -vlnv xilinx.com:ip:drp_bridge:1.0 drp_bridge_5 ]
-  set_property -dict [ list CONFIG.C_S_AXI_ADDR_WIDTH {24}  ] $drp_bridge_5
-
-  # Create instance: drp_bridge_6, and set properties
-  set drp_bridge_6 [ create_bd_cell -type ip -vlnv xilinx.com:ip:drp_bridge:1.0 drp_bridge_6 ]
-  set_property -dict [ list CONFIG.C_S_AXI_ADDR_WIDTH {24}  ] $drp_bridge_6
-
-  # Create instance: drp_bridge_7, and set properties
-  set drp_bridge_7 [ create_bd_cell -type ip -vlnv xilinx.com:ip:drp_bridge:1.0 drp_bridge_7 ]
-  set_property -dict [ list CONFIG.C_S_AXI_ADDR_WIDTH {24}  ] $drp_bridge_7
-
   # Create interface connections
-  connect_bd_intf_net -intf_net drp_bridge_4_drp [get_bd_intf_pins DRP3] [get_bd_intf_pins drp_bridge_3/DRP]
-  connect_bd_intf_net -intf_net drp_bridge_5_drp [get_bd_intf_pins DRP4] [get_bd_intf_pins drp_bridge_4/DRP]
-  connect_bd_intf_net -intf_net drp_bridge_6_drp [get_bd_intf_pins DRP5] [get_bd_intf_pins drp_bridge_5/DRP]
-  connect_bd_intf_net -intf_net drp_bridge_7_drp [get_bd_intf_pins DRP6] [get_bd_intf_pins drp_bridge_6/DRP]
-  connect_bd_intf_net -intf_net drp_mux_0_gt_drp [get_bd_intf_pins DRP7] [get_bd_intf_pins drp_bridge_7/DRP]
   connect_bd_intf_net -intf_net drp_mux_1_gt_drp [get_bd_intf_pins DRP0] [get_bd_intf_pins drp_bridge_0/DRP]
-  connect_bd_intf_net -intf_net drp_mux_2_gt_drp [get_bd_intf_pins DRP1] [get_bd_intf_pins drp_bridge_1/DRP]
-  connect_bd_intf_net -intf_net drp_mux_3_gt_drp [get_bd_intf_pins DRP2] [get_bd_intf_pins drp_bridge_2/DRP]
-  connect_bd_intf_net -intf_net microblaze_1_axi_periph_m00_axi [get_bd_intf_pins AXI7] [get_bd_intf_pins drp_bridge_7/AXI]
   connect_bd_intf_net -intf_net microblaze_1_axi_periph_m01_axi [get_bd_intf_pins AXI0] [get_bd_intf_pins drp_bridge_0/AXI]
-  connect_bd_intf_net -intf_net microblaze_1_axi_periph_m02_axi [get_bd_intf_pins AXI1] [get_bd_intf_pins drp_bridge_1/AXI]
-  connect_bd_intf_net -intf_net microblaze_1_axi_periph_m03_axi [get_bd_intf_pins AXI2] [get_bd_intf_pins drp_bridge_2/AXI]
-  connect_bd_intf_net -intf_net microblaze_1_axi_periph_m04_axi [get_bd_intf_pins AXI3] [get_bd_intf_pins drp_bridge_3/AXI]
-  connect_bd_intf_net -intf_net microblaze_1_axi_periph_m05_axi [get_bd_intf_pins AXI4] [get_bd_intf_pins drp_bridge_4/AXI]
-  connect_bd_intf_net -intf_net microblaze_1_axi_periph_m06_axi [get_bd_intf_pins AXI5] [get_bd_intf_pins drp_bridge_5/AXI]
-  connect_bd_intf_net -intf_net microblaze_1_axi_periph_m07_axi [get_bd_intf_pins AXI6] [get_bd_intf_pins drp_bridge_6/AXI]
 
   # Create port connections
-  connect_bd_net -net axi_aclk_1 [get_bd_pins AXI_aclk] [get_bd_pins drp_bridge_0/AXI_aclk] [get_bd_pins drp_bridge_1/AXI_aclk] [get_bd_pins drp_bridge_2/AXI_aclk] [get_bd_pins drp_bridge_3/AXI_aclk] [get_bd_pins drp_bridge_4/AXI_aclk] [get_bd_pins drp_bridge_5/AXI_aclk] [get_bd_pins drp_bridge_6/AXI_aclk] [get_bd_pins drp_bridge_7/AXI_aclk]
-  connect_bd_net -net proc_sys_reset_1_peripheral_aresetn [get_bd_pins AXI_aresetn] [get_bd_pins drp_bridge_0/AXI_aresetn] [get_bd_pins drp_bridge_1/AXI_aresetn] [get_bd_pins drp_bridge_2/AXI_aresetn] [get_bd_pins drp_bridge_3/AXI_aresetn] [get_bd_pins drp_bridge_4/AXI_aresetn] [get_bd_pins drp_bridge_5/AXI_aresetn] [get_bd_pins drp_bridge_6/AXI_aresetn] [get_bd_pins drp_bridge_7/AXI_aresetn]
+  connect_bd_net -net axi_aclk_1 [get_bd_pins AXI_aclk] [get_bd_pins drp_bridge_0/AXI_aclk]
+  connect_bd_net -net proc_sys_reset_1_peripheral_aresetn [get_bd_pins AXI_aresetn] [get_bd_pins drp_bridge_0/AXI_aresetn]
   
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -421,13 +365,6 @@ proc create_root_design { parentCell } {
 
   # Create interface ports
   set gt_drp_0 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:drp_rtl:1.0 gt_drp_0 ]
-  set gt_drp_1 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:drp_rtl:1.0 gt_drp_1 ]
-  set gt_drp_2 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:drp_rtl:1.0 gt_drp_2 ]
-  set gt_drp_3 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:drp_rtl:1.0 gt_drp_3 ]
-  set gt_drp_4 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:drp_rtl:1.0 gt_drp_4 ]
-  set gt_drp_5 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:drp_rtl:1.0 gt_drp_5 ]
-  set gt_drp_6 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:drp_rtl:1.0 gt_drp_6 ]
-  set gt_drp_7 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:drp_rtl:1.0 gt_drp_7 ]
 
   # Create ports
   set AXI_aclk [ create_bd_port -dir I AXI_aclk ]
@@ -445,56 +382,28 @@ proc create_root_design { parentCell } {
 
   # Create instance: microblaze_1_axi_periph, and set properties
   set microblaze_1_axi_periph [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 microblaze_1_axi_periph ]
-  set_property -dict [ list CONFIG.NUM_MI {9} CONFIG.NUM_SI {2} CONFIG.STRATEGY {1}  ] $microblaze_1_axi_periph
+  set_property -dict [ list CONFIG.NUM_MI {2} CONFIG.NUM_SI {2} CONFIG.STRATEGY {1}  ] $microblaze_1_axi_periph
 
   # Create interface connections
-  connect_bd_intf_net -intf_net drp_bridge_4_drp [get_bd_intf_ports gt_drp_3] [get_bd_intf_pins DRP_Bridge_hier/DRP3]
-  connect_bd_intf_net -intf_net drp_bridge_5_drp [get_bd_intf_ports gt_drp_4] [get_bd_intf_pins DRP_Bridge_hier/DRP4]
-  connect_bd_intf_net -intf_net drp_bridge_6_drp [get_bd_intf_ports gt_drp_5] [get_bd_intf_pins DRP_Bridge_hier/DRP5]
-  connect_bd_intf_net -intf_net drp_bridge_7_drp [get_bd_intf_ports gt_drp_6] [get_bd_intf_pins DRP_Bridge_hier/DRP6]
-  connect_bd_intf_net -intf_net drp_mux_0_gt_drp [get_bd_intf_ports gt_drp_7] [get_bd_intf_pins DRP_Bridge_hier/DRP7]
   connect_bd_intf_net -intf_net drp_mux_1_gt_drp [get_bd_intf_ports gt_drp_0] [get_bd_intf_pins DRP_Bridge_hier/DRP0]
-  connect_bd_intf_net -intf_net drp_mux_2_gt_drp [get_bd_intf_ports gt_drp_1] [get_bd_intf_pins DRP_Bridge_hier/DRP1]
-  connect_bd_intf_net -intf_net drp_mux_3_gt_drp [get_bd_intf_ports gt_drp_2] [get_bd_intf_pins DRP_Bridge_hier/DRP2]
   connect_bd_intf_net -intf_net jtag_axi_0_m_axi [get_bd_intf_pins jtag_axi_0/M_AXI] [get_bd_intf_pins microblaze_1_axi_periph/S01_AXI]
   connect_bd_intf_net -intf_net microblaze_1_axi_dp [get_bd_intf_pins mb_ps/M_AXI_DP] [get_bd_intf_pins microblaze_1_axi_periph/S00_AXI]
-  connect_bd_intf_net -intf_net microblaze_1_axi_periph_m00_axi [get_bd_intf_pins DRP_Bridge_hier/AXI7] [get_bd_intf_pins microblaze_1_axi_periph/M00_AXI]
+  connect_bd_intf_net -intf_net microblaze_1_axi_periph_M00_AXI [get_bd_intf_pins mb_ps/S_AXI] [get_bd_intf_pins microblaze_1_axi_periph/M00_AXI]
   connect_bd_intf_net -intf_net microblaze_1_axi_periph_m01_axi [get_bd_intf_pins DRP_Bridge_hier/AXI0] [get_bd_intf_pins microblaze_1_axi_periph/M01_AXI]
-  connect_bd_intf_net -intf_net microblaze_1_axi_periph_m02_axi [get_bd_intf_pins DRP_Bridge_hier/AXI1] [get_bd_intf_pins microblaze_1_axi_periph/M02_AXI]
-  connect_bd_intf_net -intf_net microblaze_1_axi_periph_m03_axi [get_bd_intf_pins DRP_Bridge_hier/AXI2] [get_bd_intf_pins microblaze_1_axi_periph/M03_AXI]
-  connect_bd_intf_net -intf_net microblaze_1_axi_periph_m04_axi [get_bd_intf_pins DRP_Bridge_hier/AXI3] [get_bd_intf_pins microblaze_1_axi_periph/M04_AXI]
-  connect_bd_intf_net -intf_net microblaze_1_axi_periph_m05_axi [get_bd_intf_pins DRP_Bridge_hier/AXI4] [get_bd_intf_pins microblaze_1_axi_periph/M05_AXI]
-  connect_bd_intf_net -intf_net microblaze_1_axi_periph_m06_axi [get_bd_intf_pins DRP_Bridge_hier/AXI5] [get_bd_intf_pins microblaze_1_axi_periph/M06_AXI]
-  connect_bd_intf_net -intf_net microblaze_1_axi_periph_m07_axi [get_bd_intf_pins DRP_Bridge_hier/AXI6] [get_bd_intf_pins microblaze_1_axi_periph/M07_AXI]
-  connect_bd_intf_net -intf_net microblaze_1_axi_periph_m08_axi [get_bd_intf_pins mb_ps/S_AXI] [get_bd_intf_pins microblaze_1_axi_periph/M08_AXI]
 
   # Create port connections
-  connect_bd_net -net axi_aclk_1 [get_bd_ports AXI_aclk] [get_bd_pins DRP_Bridge_hier/AXI_aclk] [get_bd_pins jtag_axi_0/aclk] [get_bd_pins mb_ps/S_AXI_ACLK] [get_bd_pins microblaze_1_axi_periph/ACLK] [get_bd_pins microblaze_1_axi_periph/M00_ACLK] [get_bd_pins microblaze_1_axi_periph/M01_ACLK] [get_bd_pins microblaze_1_axi_periph/M02_ACLK] [get_bd_pins microblaze_1_axi_periph/M03_ACLK] [get_bd_pins microblaze_1_axi_periph/M04_ACLK] [get_bd_pins microblaze_1_axi_periph/M05_ACLK] [get_bd_pins microblaze_1_axi_periph/M06_ACLK] [get_bd_pins microblaze_1_axi_periph/M07_ACLK] [get_bd_pins microblaze_1_axi_periph/M08_ACLK] [get_bd_pins microblaze_1_axi_periph/S00_ACLK] [get_bd_pins microblaze_1_axi_periph/S01_ACLK]
-  connect_bd_net -net m07_aresetn_1 [get_bd_pins jtag_axi_0/aresetn] [get_bd_pins mb_ps/interconnect_aresetn] [get_bd_pins microblaze_1_axi_periph/ARESETN] [get_bd_pins microblaze_1_axi_periph/M00_ARESETN] [get_bd_pins microblaze_1_axi_periph/M01_ARESETN] [get_bd_pins microblaze_1_axi_periph/M02_ARESETN] [get_bd_pins microblaze_1_axi_periph/M03_ARESETN] [get_bd_pins microblaze_1_axi_periph/M04_ARESETN] [get_bd_pins microblaze_1_axi_periph/M05_ARESETN] [get_bd_pins microblaze_1_axi_periph/M06_ARESETN] [get_bd_pins microblaze_1_axi_periph/M07_ARESETN] [get_bd_pins microblaze_1_axi_periph/M08_ARESETN] [get_bd_pins microblaze_1_axi_periph/S00_ARESETN] [get_bd_pins microblaze_1_axi_periph/S01_ARESETN]
+  connect_bd_net -net axi_aclk_1 [get_bd_ports AXI_aclk] [get_bd_pins DRP_Bridge_hier/AXI_aclk] [get_bd_pins jtag_axi_0/aclk] [get_bd_pins mb_ps/S_AXI_ACLK] [get_bd_pins microblaze_1_axi_periph/ACLK] [get_bd_pins microblaze_1_axi_periph/M00_ACLK] [get_bd_pins microblaze_1_axi_periph/M01_ACLK] [get_bd_pins microblaze_1_axi_periph/S00_ACLK] [get_bd_pins microblaze_1_axi_periph/S01_ACLK]
+  connect_bd_net -net m07_aresetn_1 [get_bd_pins jtag_axi_0/aresetn] [get_bd_pins mb_ps/interconnect_aresetn] [get_bd_pins microblaze_1_axi_periph/ARESETN] [get_bd_pins microblaze_1_axi_periph/M00_ARESETN] [get_bd_pins microblaze_1_axi_periph/M01_ARESETN] [get_bd_pins microblaze_1_axi_periph/S00_ARESETN] [get_bd_pins microblaze_1_axi_periph/S01_ARESETN]
   connect_bd_net -net proc_sys_reset_1_peripheral_aresetn [get_bd_pins DRP_Bridge_hier/AXI_aresetn] [get_bd_pins mb_ps/S_AXI_ARESETN]
   connect_bd_net -net reset_1 [get_bd_ports reset] [get_bd_pins mb_ps/ext_reset_in]
 
   # Create address segments
-  create_bd_addr_seg -range 0x4000 -offset 0xC2000000 [get_bd_addr_spaces jtag_axi_0/Data] [get_bd_addr_segs mb_ps/axi_bram_ctrl_1/S_AXI/Mem0] SEG_axi_bram_ctrl_1_Mem0
-  create_bd_addr_seg -range 0x1000 -offset 0xC0007000 [get_bd_addr_spaces jtag_axi_0/Data] [get_bd_addr_segs DRP_Bridge_hier/drp_bridge_7/AXI/reg0] SEG_drp_bridge_0_reg0
-  create_bd_addr_seg -range 0x1000 -offset 0xC0000000 [get_bd_addr_spaces jtag_axi_0/Data] [get_bd_addr_segs DRP_Bridge_hier/drp_bridge_0/AXI/reg0] SEG_drp_bridge_1_reg0
-  create_bd_addr_seg -range 0x1000 -offset 0xC0001000 [get_bd_addr_spaces jtag_axi_0/Data] [get_bd_addr_segs DRP_Bridge_hier/drp_bridge_1/AXI/reg0] SEG_drp_bridge_2_reg0
-  create_bd_addr_seg -range 0x1000 -offset 0xC0002000 [get_bd_addr_spaces jtag_axi_0/Data] [get_bd_addr_segs DRP_Bridge_hier/drp_bridge_2/AXI/reg0] SEG_drp_bridge_3_reg0
-  create_bd_addr_seg -range 0x1000 -offset 0xC0003000 [get_bd_addr_spaces jtag_axi_0/Data] [get_bd_addr_segs DRP_Bridge_hier/drp_bridge_3/AXI/reg0] SEG_drp_bridge_4_reg0
-  create_bd_addr_seg -range 0x1000 -offset 0xC0004000 [get_bd_addr_spaces jtag_axi_0/Data] [get_bd_addr_segs DRP_Bridge_hier/drp_bridge_4/AXI/reg0] SEG_drp_bridge_5_reg0
-  create_bd_addr_seg -range 0x1000 -offset 0xC0005000 [get_bd_addr_spaces jtag_axi_0/Data] [get_bd_addr_segs DRP_Bridge_hier/drp_bridge_5/AXI/reg0] SEG_drp_bridge_6_reg0
-  create_bd_addr_seg -range 0x1000 -offset 0xC0006000 [get_bd_addr_spaces jtag_axi_0/Data] [get_bd_addr_segs DRP_Bridge_hier/drp_bridge_6/AXI/reg0] SEG_drp_bridge_7_reg0
-  create_bd_addr_seg -range 0x4000 -offset 0x0 [get_bd_addr_spaces mb_ps/microblaze_1/Instruction] [get_bd_addr_segs mb_ps/microblaze_1_local_memory/ilmb_bram_if_cntlr/SLMB/Mem] SEG1
-  create_bd_addr_seg -range 0x4000 -offset 0x0 [get_bd_addr_spaces mb_ps/microblaze_1/Data] [get_bd_addr_segs mb_ps/microblaze_1_local_memory/dlmb_bram_if_cntlr/SLMB/Mem] SEG2
-  create_bd_addr_seg -range 0x4000 -offset 0xC2000000 [get_bd_addr_spaces mb_ps/microblaze_1/Data] [get_bd_addr_segs mb_ps/axi_bram_ctrl_1/S_AXI/Mem0] SEG_axi_bram_ctrl_1_Mem0
-  create_bd_addr_seg -range 0x1000 -offset 0xC0007000 [get_bd_addr_spaces mb_ps/microblaze_1/Data] [get_bd_addr_segs DRP_Bridge_hier/drp_bridge_7/AXI/reg0] SEG_drp_bridge_0_reg0
-  create_bd_addr_seg -range 0x1000 -offset 0xC0000000 [get_bd_addr_spaces mb_ps/microblaze_1/Data] [get_bd_addr_segs DRP_Bridge_hier/drp_bridge_0/AXI/reg0] SEG_drp_bridge_1_reg0
-  create_bd_addr_seg -range 0x1000 -offset 0xC0001000 [get_bd_addr_spaces mb_ps/microblaze_1/Data] [get_bd_addr_segs DRP_Bridge_hier/drp_bridge_1/AXI/reg0] SEG_drp_bridge_2_reg0
-  create_bd_addr_seg -range 0x1000 -offset 0xC0002000 [get_bd_addr_spaces mb_ps/microblaze_1/Data] [get_bd_addr_segs DRP_Bridge_hier/drp_bridge_2/AXI/reg0] SEG_drp_bridge_3_reg0
-  create_bd_addr_seg -range 0x1000 -offset 0xC0003000 [get_bd_addr_spaces mb_ps/microblaze_1/Data] [get_bd_addr_segs DRP_Bridge_hier/drp_bridge_3/AXI/reg0] SEG_drp_bridge_4_reg0
-  create_bd_addr_seg -range 0x1000 -offset 0xC0004000 [get_bd_addr_spaces mb_ps/microblaze_1/Data] [get_bd_addr_segs DRP_Bridge_hier/drp_bridge_4/AXI/reg0] SEG_drp_bridge_5_reg0
-  create_bd_addr_seg -range 0x1000 -offset 0xC0005000 [get_bd_addr_spaces mb_ps/microblaze_1/Data] [get_bd_addr_segs DRP_Bridge_hier/drp_bridge_5/AXI/reg0] SEG_drp_bridge_6_reg0
-  create_bd_addr_seg -range 0x1000 -offset 0xC0006000 [get_bd_addr_spaces mb_ps/microblaze_1/Data] [get_bd_addr_segs DRP_Bridge_hier/drp_bridge_6/AXI/reg0] SEG_drp_bridge_7_reg0
+  create_bd_addr_seg -range 0x80000 -offset 0xC2000000 [get_bd_addr_spaces jtag_axi_0/Data] [get_bd_addr_segs mb_ps/axi_bram_ctrl_1/S_AXI/Mem0] SEG_axi_bram_ctrl_1_Mem0
+  create_bd_addr_seg -range 0x80000 -offset 0xC0000000 [get_bd_addr_spaces jtag_axi_0/Data] [get_bd_addr_segs DRP_Bridge_hier/drp_bridge_0/AXI/reg0] SEG_drp_bridge_0_reg0
+  create_bd_addr_seg -range 0x80000 -offset 0x0 [get_bd_addr_spaces mb_ps/microblaze_1/Instruction] [get_bd_addr_segs mb_ps/microblaze_1_local_memory/ilmb_bram_if_cntlr/SLMB/Mem] SEG1
+  create_bd_addr_seg -range 0x80000 -offset 0x0 [get_bd_addr_spaces mb_ps/microblaze_1/Data] [get_bd_addr_segs mb_ps/microblaze_1_local_memory/dlmb_bram_if_cntlr/SLMB/Mem] SEG2
+  create_bd_addr_seg -range 0x80000 -offset 0xC2000000 [get_bd_addr_spaces mb_ps/microblaze_1/Data] [get_bd_addr_segs mb_ps/axi_bram_ctrl_1/S_AXI/Mem0] SEG_axi_bram_ctrl_1_Mem0
+  create_bd_addr_seg -range 0x80000 -offset 0xC0000000 [get_bd_addr_spaces mb_ps/microblaze_1/Data] [get_bd_addr_segs DRP_Bridge_hier/drp_bridge_0/AXI/reg0] SEG_drp_bridge_0_reg0
   
 
   # Restore current instance
